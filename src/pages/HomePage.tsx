@@ -1,5 +1,4 @@
-import Navbar from "../components/common/Navbar";
-import Footer from "../components/common/Footer";
+
 import Hero from "../components/LandingPage/Hero/Hero";
 import About from "../components/LandingPage/AboutUs/About";
 import Benefits from "../components/LandingPage/BenefitsOfJoining/Benefits";
@@ -11,18 +10,13 @@ import JoinCommunity from "../components/LandingPage/JoinCommunity/JoinCommunity
 const HomePage = () => {
     return (
         <>
-            <Navbar />
-            <main>
-                <Hero />
-                <About />
-                <Benefits />
-                <WhatYouGet />
-                <JoinCommunity />
-                <HiringOpportunities />
-                <Feedbacks />
-
-            </main>
-            <Footer />
+            <Hero />
+            <About />
+            <Benefits />
+            <WhatYouGet />
+            <JoinCommunity />
+            <HiringOpportunities />
+            <Feedbacks />
         </>
     );
 };

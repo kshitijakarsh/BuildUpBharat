@@ -8,7 +8,7 @@ import Funding from '@/assets/benefits/Funding.svg'
 
 const Benefits: React.FC = () => {
     return (
-        <section id="benefits" className="relative w-full py-24 bg-white overflow-hidden">
+        <section id="benefits" className="relative w-full py-10 md:py-24 bg-white overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
                 <SectionHeader bgText="Benefits">
                     <span className="text-brand-navy">Benefits of Joining</span> Build<span className="text-brand-orange-deep">Up</span> Bharat

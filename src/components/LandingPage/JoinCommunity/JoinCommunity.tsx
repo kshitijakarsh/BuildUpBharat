@@ -32,11 +32,7 @@ const COMMUNITY_FEATURES: FeatureItem[] = [
 
 const JoinCommunity: React.FC = () => {
   return (
-    <section className="relative w-full py-24 bg-white overflow-hidden">
-      {/* Decorative dots based on image */}
-      <div className="absolute top-0 left-10 w-3 h-3 bg-indigo-500 rounded-full opacity-60 animate-bounce"></div>
-      <div className="absolute bottom-10 right-20 w-4 h-4 bg-orange-500 rounded-full opacity-60 animate-pulse"></div>
-
+    <section id="community" className="relative w-full py-10 md:py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <SectionHeader bgText="Join Us">
           <span className="text-brand-navy">
@@ -44,9 +40,9 @@ const JoinCommunity: React.FC = () => {
           </span>
         </SectionHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-10 lg:gap-16 max-w-5xl mx-auto items-stretch mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-16 max-w-5xl mx-auto items-stretch">
           {COMMUNITY_FEATURES.map((feature) => (
-            <div key={feature.id} className="mt-10 md:mt-0">
+            <div key={feature.id}>
               <FeatureBlock
                 item={feature}
               />

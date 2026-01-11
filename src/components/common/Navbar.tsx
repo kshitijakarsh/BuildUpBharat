@@ -32,9 +32,9 @@ export default function Navbar() {
             {isMenuOpen ? <X size={24} className="text-brand-orange" /> : <Menu size={24} className="text-brand-orange" />}
           </button>
 
-          <div className="flex items-center text-brand-orange">
+          <Link to="/" className="flex items-center text-brand-orange">
             <img src={logo} alt="Build Up Bharat" className="h-10 md:h-12 w-auto" />
-          </div>
+          </Link>
         </div>
 
         {/* Desktop Navigation Links */}
@@ -43,13 +43,9 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-brand-orange relative pb-1 ${link.active ? 'text-black' : 'text-gray-600'
-                }`}
+              className="text-sm font-medium transition-colors relative pb-1 text-gray-600 hover:text-brand-orange"
             >
               {link.name}
-              {link.active && (
-                <span className="absolute bottom-[-10px] left-0 w-6 h-[3px] bg-brand-orange rounded-full" />
-              )}
             </a>
           ))}
         </div>
@@ -57,7 +53,7 @@ export default function Navbar() {
         {/* Action Button */}
         <div>
           <Link to="/register">
-            <Button variant="primary" className="px-6! py-2! md:py-2.5! text-xs md:text-sm!">
+            <Button variant="primary" size="sm">
               Register
             </Button>
           </Link>
@@ -91,8 +87,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={toggleMenu}
-                className={`text-lg font-medium transition-colors hover:text-brand-orange ${link.active ? 'text-brand-orange' : 'text-gray-600'
-                  }`}
+                className="text-lg font-medium transition-colors hover:text-brand-orange text-gray-600"
               >
                 {link.name}
               </a>
@@ -101,7 +96,7 @@ export default function Navbar() {
 
           <div className="mt-auto pt-8 border-t border-gray-100">
             <Link to="/register" onClick={toggleMenu}>
-              <Button variant="primary" className="w-full">
+              <Button variant="primary" fullWidth>
                 Register Now
               </Button>
             </Link>

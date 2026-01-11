@@ -59,9 +59,7 @@ const HiringFeatureBlock: React.FC<{ item: OpportunityItem }> = ({ item }) => (
 
 const HiringOpportunities: React.FC = () => {
   return (
-    <section className="relative w-full py-24 bg-white overflow-hidden">
-      {/* Decorative dots */}
-      <div className="absolute top-10 right-20 w-4 h-4 bg-orange-400 rounded-full opacity-60"></div>
+    <section id="opportunities" className="relative w-full py-10 md:py-24 bg-white overflow-hidden">
       <div className="absolute bottom-20 left-10 w-3 h-3 bg-blue-500 rounded-full opacity-60"></div>
 
       <div className="container mx-auto px-6 relative z-10">

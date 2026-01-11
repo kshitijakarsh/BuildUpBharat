@@ -26,7 +26,7 @@ const About: React.FC = () => {
     ];
 
     return (
-        <section id="about" className="relative w-full py-24 bg-white overflow-hidden">
+        <section id="about" className="relative w-full py-10 md:py-24 bg-white overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
 
                 <SectionHeader bgText="About Us">

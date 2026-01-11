@@ -82,7 +82,7 @@ const WhatYouGet = () => {
     return (
         <section
             id="what-you-get"
-            className="relative w-full overflow-hidden bg-white py-24"
+            className="relative w-full overflow-hidden bg-white py-10 md:py-24"
         >
             <div className="container relative z-10 mx-auto px-6">
                 <SectionHeader bgText="WHAT YOU GET" className="mb-10 md:mb-20">

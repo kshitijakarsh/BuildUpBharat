@@ -99,7 +99,7 @@ const Feedbacks: React.FC = () => {
   )
 
   return (
-    <section className="py-24">
+    <section id="feedbacks" className="py-10 md:py-24">
       <div className="container mx-auto px-6">
         <SectionHeader bgText="Success Stories">
           <span className="text-brand-navy">
