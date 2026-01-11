@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", sans-serif;
+  --font-nunito: "Nunito Sans", sans-serif;
+
+  --color-brand-blue-start: #103ED2;
+  --color-brand-blue: #1E2EFF;
+  --color-brand-blue-end: #01147A;
+  --color-brand-orange: #FF7A00;
+  --color-brand-orange-deep: #FF6600;
+  --color-trusted-cyan: #00D1FF;
+  --color-tours-blue: #4154FF;
+  --color-urgent-red: #FF4D4D;
+  --color-brand-light-blue: #CFE5FF;
+  --color-brand-navy: #2F327D;
+  --color-brand-pale-blue: #D4E9FF;
+  --color-brand-orange-light: #FFB169;
+  --color-brand-cyan-bright: #00D9F5;
+}
