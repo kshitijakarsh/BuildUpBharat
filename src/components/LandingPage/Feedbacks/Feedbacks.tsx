@@ -55,6 +55,8 @@ const swiperConfig = {
   modules: [Navigation, Pagination, Autoplay],
   loop: true,
   centeredSlides: true,
+  slidesPerView: 1,
+  spaceBetween: 0,
   autoplay: {
     delay: 5000,
     disableOnInteraction: false,
@@ -111,9 +113,7 @@ const Feedbacks: React.FC = () => {
         <div className="relative mt-16 px-4 md:px-0">
           <Swiper
             {...swiperConfig}
-            slidesPerView={1}
-            spaceBetween={0}
-            className="pb-20 overflow-visible!"
+            className="pb-20"
           >
             {slides}
           </Swiper>
