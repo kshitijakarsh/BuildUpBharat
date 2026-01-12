@@ -10,7 +10,7 @@ interface OpportunityCardProps {
 }
 
 const OpportunityCard = ({ logo, role, company, location }: OpportunityCardProps) => (
-    <div className="bg-white p-5 rounded-2xl border border-gray-100 flex items-center gap-4 transition-shadow hover:shadow-md cursor-pointer group h-full">
+    <div className="bg-white p-5 rounded-2xl border border-gray-100 flex items-center gap-4 transition-shadow cursor-pointer group/card h-full">
         {/* Logo */}
         <div className="w-12 h-12 rounded-full border border-gray-50 bg-white flex items-center justify-center shrink-0 p-2 shadow-sm">
             <img src={logo} alt={company} className="w-full h-full object-contain" />
@@ -27,7 +27,7 @@ const OpportunityCard = ({ logo, role, company, location }: OpportunityCardProps
         </div>
 
         {/* Action */}
-        <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:bg-brand-orange group-hover:border-brand-orange group-hover:text-white transition-all">
+        <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover/card:bg-brand-orange group-hover/card:border-brand-orange group-hover/card:text-white transition-all">
             <ChevronRight size={16} />
         </button>
     </div>
@@ -56,17 +56,18 @@ const OpportunityList = ({ title, items, id }: OpportunityListProps) => {
                 <Swiper
                     modules={[Navigation]}
                     spaceBetween={24}
-                    slidesPerView={1.1}
+                    slidesPerView={1}
+                    centeredSlides={true}
                     navigation={{
                         nextEl: `.${nextClass}`,
                         prevEl: `.${prevClass}`,
                     }}
                     breakpoints={{
-                        640: { slidesPerView: 1.5 },
-                        768: { slidesPerView: 2 },
-                        1024: { slidesPerView: 2.5 }, // Show 2.5 cards on desktop as per design density
+                        640: { slidesPerView: 1.5, centeredSlides: false },
+                        768: { slidesPerView: 2, centeredSlides: false },
+                        1024: { slidesPerView: 2.5, centeredSlides: false },
                     }}
-                    className="pb-4"
+                    className="pb-4 px-12 md:px-0"
                 >
                     {items.map((item, i) => (
                         <SwiperSlide key={i} className="h-auto">
@@ -76,10 +77,10 @@ const OpportunityList = ({ title, items, id }: OpportunityListProps) => {
                 </Swiper>
 
                 {/* Navigation Buttons */}
-                <button className={`${prevClass} absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
+                <button className={`${prevClass} absolute -left-1 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
                     <ChevronRight size={20} className="rotate-180 text-gray-600" />
                 </button>
-                <button className={`${nextClass} absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
+                <button className={`${nextClass} absolute -right-1 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
                     <ChevronRight size={20} className="text-gray-600" />
                 </button>
             </div>

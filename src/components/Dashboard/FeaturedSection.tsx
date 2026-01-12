@@ -45,22 +45,22 @@ const FeaturedSection = () => {
     const cards = [
         {
             image:
-                "https://d8it4huxumps7.cloudfront.net/uploads/images/65799863484f4_ai_hackathon_2024.jpg?d=1266x708",
+                "https://images.unsplash.com/photo-1667312939934-60fc3bfa4ec0?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             tags: ["Online", "Free"],
         },
         {
             image:
-                "https://d8it4huxumps7.cloudfront.net/uploads/images/66950f56d09c6_hero_campus_challenge_season_10.jpg?d=1266x708",
+                "https://images.unsplash.com/photo-1667312939934-60fc3bfa4ec0?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             tags: ["Online", "Paid"],
         },
         {
             image:
-                "https://d8it4huxumps7.cloudfront.net/uploads/images/6530f2405d6cb_loreal_brandstorm_2024.jpg?d=1266x708",
+                "https://images.unsplash.com/photo-1667312939934-60fc3bfa4ec0?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             tags: ["Offline", "Free"],
         },
         {
             image:
-                "https://d8it4huxumps7.cloudfront.net/uploads/images/65799863484f4_ai_hackathon_2024.jpg?d=1266x708",
+                "https://images.unsplash.com/photo-1667312939934-60fc3bfa4ec0?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             tags: ["Offline", "Paid"],
         },
     ];
@@ -73,19 +73,19 @@ const FeaturedSection = () => {
 
             <div className="relative">
                 {/* Custom arrows */}
-                <button className="featured-prev absolute -left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center hover:scale-110 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-gray-600">
-                    <ChevronLeft size={22} />
+                <button className="featured-prev absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center hover:scale-110 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-gray-600">
+                    <ChevronLeft size={20} className="md:w-[22px] md:h-[22px]" />
                 </button>
 
-                <button className="featured-next absolute -right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center hover:scale-110 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-gray-600">
-                    <ChevronRight size={22} />
+                <button className="featured-next absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center hover:scale-110 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-gray-600">
+                    <ChevronRight size={20} className="md:w-[22px] md:h-[22px]" />
                 </button>
 
                 {/* Swiper */}
                 <Swiper
                     modules={[Navigation]}
                     spaceBetween={32}
-                    slidesPerView={1.1}
+                    slidesPerView={1}
                     navigation={{
                         nextEl: ".featured-next",
                         prevEl: ".featured-prev",
@@ -95,7 +95,7 @@ const FeaturedSection = () => {
                         768: { slidesPerView: 2.2 },
                         1024: { slidesPerView: 3 },
                     }}
-                    className="pb-10"
+                    className="pb-10 px-12 md:px-0"
                 >
                     {cards.map((card, i) => (
                         <SwiperSlide key={i}>
