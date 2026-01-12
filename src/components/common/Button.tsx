@@ -1,6 +1,8 @@
 import * as React from "react";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-type ButtonVariant = "primary" | "outline";
+type ButtonVariant = "primary" | "outline" | "secondary";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps
@@ -10,8 +12,9 @@ interface ButtonProps
     fullWidth?: boolean;
 }
 
-const cn = (...classes: (string | false | undefined)[]) =>
-    classes.filter(Boolean).join(" ");
+function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+}
 
 const baseStyles =
     "inline-flex items-center justify-center whitespace-nowrap rounded-full shadow-lg transition-all active:scale-95";
@@ -27,6 +30,8 @@ const variantStyles: Record<ButtonVariant, string> = {
         "bg-brand-orange-deep text-white font-medium hover:bg-brand-orange",
     outline:
         "border border-white/40 text-white font-normal md:font-medium hover:bg-white/10",
+    secondary:
+        "bg-white border border-gray-200 text-gray-900 font-medium hover:bg-gray-50",
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

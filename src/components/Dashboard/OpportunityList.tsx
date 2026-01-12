@@ -1,0 +1,90 @@
+import { ChevronRight, MapPin } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+
+interface OpportunityCardProps {
+    logo: string;
+    role: string;
+    company: string;
+    location: string;
+}
+
+const OpportunityCard = ({ logo, role, company, location }: OpportunityCardProps) => (
+    <div className="bg-white p-5 rounded-2xl border border-gray-100 flex items-center gap-4 transition-shadow hover:shadow-md cursor-pointer group h-full">
+        {/* Logo */}
+        <div className="w-12 h-12 rounded-full border border-gray-50 bg-white flex items-center justify-center shrink-0 p-2 shadow-sm">
+            <img src={logo} alt={company} className="w-full h-full object-contain" />
+        </div>
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+            <h4 className="font-bold text-gray-900 leading-tight truncate">{role}</h4>
+            <p className="text-sm text-gray-600 truncate mt-0.5">{company}</p>
+            <div className="flex items-center gap-1 mt-2 text-xs text-gray-400">
+                <MapPin size={12} />
+                <span className="truncate">{location}</span>
+            </div>
+        </div>
+
+        {/* Action */}
+        <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:bg-brand-orange group-hover:border-brand-orange group-hover:text-white transition-all">
+            <ChevronRight size={16} />
+        </button>
+    </div>
+);
+
+interface OpportunityListProps {
+    title: string;
+    items: OpportunityCardProps[];
+    id: string; // unique id for navigation
+}
+
+const OpportunityList = ({ title, items, id }: OpportunityListProps) => {
+    const nextClass = `opp-next-${id}`;
+    const prevClass = `opp-prev-${id}`;
+
+    return (
+        <div className="mt-10 relative">
+            <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-brand-blue-text border-l-4 border-brand-blue-text pl-3 leading-none">
+                    {title}
+                </h2>
+                <a href="#" className="text-sm font-semibold text-blue-500 hover:text-blue-600 underline underline-offset-4">View All</a>
+            </div>
+
+            <div className="relative group">
+                <Swiper
+                    modules={[Navigation]}
+                    spaceBetween={24}
+                    slidesPerView={1.1}
+                    navigation={{
+                        nextEl: `.${nextClass}`,
+                        prevEl: `.${prevClass}`,
+                    }}
+                    breakpoints={{
+                        640: { slidesPerView: 1.5 },
+                        768: { slidesPerView: 2 },
+                        1024: { slidesPerView: 2.5 }, // Show 2.5 cards on desktop as per design density
+                    }}
+                    className="pb-4"
+                >
+                    {items.map((item, i) => (
+                        <SwiperSlide key={i} className="h-auto">
+                            <OpportunityCard {...item} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+
+                {/* Navigation Buttons */}
+                <button className={`${prevClass} absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
+                    <ChevronRight size={20} className="rotate-180 text-gray-600" />
+                </button>
+                <button className={`${nextClass} absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
+                    <ChevronRight size={20} className="text-gray-600" />
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default OpportunityList;

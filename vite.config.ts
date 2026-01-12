@@ -14,4 +14,15 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          utils: ['axios', 'clsx', 'tailwind-merge', 'zod', 'react-hook-form'],
+          ui: ['lucide-react', 'swiper'],
+        },
+      },
+    },
+  },
 })
