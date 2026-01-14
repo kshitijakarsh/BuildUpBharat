@@ -8,6 +8,10 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const ToursPage = lazy(() => import('./pages/ToursPage'));
+const TourDetailPage = lazy(() => import('./pages/TourDetailPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+
 
 // Loading fallback
 const PageLoader = () => (
@@ -27,7 +31,11 @@ function App() {
             </Route>
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/tours" element={<ToursPage />} />
+              <Route path="/tours/:id" element={<TourDetailPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
+
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>

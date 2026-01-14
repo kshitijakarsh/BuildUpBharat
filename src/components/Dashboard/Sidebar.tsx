@@ -12,15 +12,30 @@ import {
     HelpCircle,
     ChevronLeft,
     ChevronRight,
+    Map
 } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface SidebarProps {
     isCollapsed: boolean;
     onToggle: () => void;
 }
 
-const SidebarItem = ({ icon: Icon, label, active = false, isCollapsed }: { icon: any, label: string, active?: boolean, isCollapsed: boolean }) => (
-    <div
+const SidebarItem = ({
+    icon: Icon,
+    label,
+    href,
+    active = false,
+    isCollapsed
+}: {
+    icon: any,
+    label: string,
+    href: string,
+    active?: boolean,
+    isCollapsed: boolean
+}) => (
+    <Link
+        to={href}
         className={`flex items-center ${isCollapsed ? 'justify-center px-2' : 'gap-3 px-4'} py-3 rounded-full cursor-pointer transition-all duration-300 group relative ${active ? 'bg-brand-navy text-white' : 'text-gray-500 hover:bg-gray-100'}`}
     >
         <Icon size={20} className="shrink-0" />
@@ -33,10 +48,26 @@ const SidebarItem = ({ icon: Icon, label, active = false, isCollapsed }: { icon:
         <span className={`font-medium text-sm whitespace-nowrap overflow-hidden transition-all duration-300 ${isCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}>
             {label}
         </span>
-    </div>
+    </Link>
 );
 
 const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
+    const location = useLocation();
+
+    const items = [
+        { icon: LayoutDashboard, label: "Explore", href: "/dashboard" },
+        { icon: BookOpen, label: "Courses", href: "/courses" },
+        { icon: Briefcase, label: "Career Hub", href: "/career" },
+        { icon: MonitorPlay, label: "Mock Test", href: "/mock-test" },
+        { icon: Map, label: "Tours", href: "/tours" },
+        { icon: GraduationCap, label: "Mentorship", href: "/mentorship" },
+        { icon: Trophy, label: "Quiz Zone", href: "/quiz" },
+        { icon: Calendar, label: "Events", href: "/events" },
+        { icon: Users, label: "Workshops", href: "/workshops" },
+        { icon: Trophy, label: "Success Stories", href: "/stories" },
+        { icon: HelpCircle, label: "Help Desk", href: "/help" },
+    ];
+
     return (
         <div className="h-full flex flex-col relative transition-all duration-300">
             {/* Toggle Button */}
@@ -48,22 +79,21 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
             </button>
 
             <div className="flex-1 overflow-y-auto px-2 py-2 space-y-1">
-                <SidebarItem icon={LayoutDashboard} label="Explore" active isCollapsed={isCollapsed} />
-                <SidebarItem icon={BookOpen} label="Courses" isCollapsed={isCollapsed} />
-                <SidebarItem icon={Briefcase} label="Career Hub" isCollapsed={isCollapsed} />
-                <SidebarItem icon={MonitorPlay} label="Mock Test" isCollapsed={isCollapsed} />
-                <SidebarItem icon={Users} label="Tours" isCollapsed={isCollapsed} />
-                <SidebarItem icon={GraduationCap} label="Mentorship" isCollapsed={isCollapsed} />
-                <SidebarItem icon={Trophy} label="Quiz Zone" isCollapsed={isCollapsed} />
-                <SidebarItem icon={Calendar} label="Events" isCollapsed={isCollapsed} />
-                <SidebarItem icon={Users} label="Workshops" isCollapsed={isCollapsed} />
-                <SidebarItem icon={Trophy} label="Success Stories" isCollapsed={isCollapsed} />
-                <SidebarItem icon={HelpCircle} label="Help Desk" isCollapsed={isCollapsed} />
+                {items.map((item) => (
+                    <SidebarItem
+                        key={item.label}
+                        icon={item.icon}
+                        label={item.label}
+                        href={item.href}
+                        active={location.pathname === item.href}
+                        isCollapsed={isCollapsed}
+                    />
+                ))}
             </div>
 
             <div className={`p-2 border-t border-gray-100 space-y-1 ${isCollapsed ? '' : 'px-4'}`}>
-                <SidebarItem icon={Settings} label="Settings" isCollapsed={isCollapsed} />
-                <SidebarItem icon={LogOut} label="Logout" isCollapsed={isCollapsed} />
+                <SidebarItem icon={Settings} label="Settings" href="/settings" active={location.pathname === '/settings'} isCollapsed={isCollapsed} />
+                <SidebarItem icon={LogOut} label="Logout" href="/logout" isCollapsed={isCollapsed} />
             </div>
         </div>
     );

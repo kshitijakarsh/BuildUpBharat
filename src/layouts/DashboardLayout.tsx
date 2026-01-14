@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Sidebar from "../components/Dashboard/Sidebar";
+import Footer from "../components/common/Footer";
 
 const DashboardLayout = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -21,8 +22,13 @@ const DashboardLayout = () => {
                         />
                     </div>
                 </aside>
-                <main className="flex-1 p-0 md:px-8 overflow-y-auto w-full">
-                    <Outlet />
+                <main className="flex-1 p-0 md:px-8 overflow-y-auto w-full h-[calc(100vh-80px)]">
+                    <div className="max-w-7xl mx-auto py-6">
+                        <Outlet />
+                    </div>
+                    <div className="border-t border-gray-100">
+                        <Footer />
+                    </div>
                 </main>
             </div>
         </div>

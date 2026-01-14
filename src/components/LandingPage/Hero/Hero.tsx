@@ -5,7 +5,7 @@ import { HeroVisuals } from "./HeroVisuals";
 
 const Hero: React.FC = () => {
     return (
-        <section className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-linear-to-br from-brand-blue-start to-brand-blue-end text-white px-6 pb-10 pt-20 md:pt-0">
+        <section id="home" className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-linear-to-br from-brand-blue-start to-brand-blue-end text-white px-6 pb-10 pt-20 md:pt-0">
             <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10 w-full">
 
                 <div className="flex flex-col space-y-8 lg:w-1/2">

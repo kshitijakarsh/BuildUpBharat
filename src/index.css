@@ -25,3 +25,13 @@
   --color-brand-purple-light: #7C87F3;
   --color-brand-gray-light: #999999;
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+}
