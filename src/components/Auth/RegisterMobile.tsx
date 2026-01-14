@@ -60,18 +60,6 @@ const RegisterMobile: React.FC = () => {
                         Create Account
                     </h1>
 
-                    {/* Google Button Placeholder */}
-                    <button className="w-full bg-white border border-gray-100 shadow-sm rounded-full py-2.5 md:py-3 px-4 flex items-center justify-center gap-2 md:gap-3 hover:bg-gray-50 transition-colors mb-6 md:mb-8 group">
-                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 md:w-6 md:h-6" />
-                        <span className="font-semibold text-sm md:text-base text-gray-600 group-hover:text-gray-900">SignUp with Google</span>
-                    </button>
-
-                    <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-                        <div className="h-px bg-gray-200 flex-1"></div>
-                        <span className="text-xs md:text-sm text-gray-400 font-medium">or</span>
-                        <div className="h-px bg-gray-200 flex-1"></div>
-                    </div>
-
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                         <h2 className="text-brand-highlight font-bold text-center mb-4 md:mb-6 text-base md:text-lg">
                             Account Details

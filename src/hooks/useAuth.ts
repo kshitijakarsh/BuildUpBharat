@@ -6,7 +6,7 @@ import {
     logoutUi,
     type RegisterPayload,
     type LoginPayload,
-} from '../lib/api';
+} from '../lib/api/auth';
 
 export const useRegister = () => {
     return useMutation({

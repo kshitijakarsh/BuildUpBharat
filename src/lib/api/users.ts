@@ -1,0 +1,51 @@
+import client from './client';
+import type { PaginatedResponse, SingleResponse } from './types';
+
+
+export interface User {
+    _id: string;
+    fullName: string;
+    email: string;
+    mobileNumber: string;
+    role: 'user' | 'admin';
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface UpdateUserPayload {
+    fullName?: string;
+    email?: string;
+    mobileNumber?: string;
+}
+
+export interface ChangePasswordPayload {
+    currentPassword: string;
+    newPassword: string;
+}
+
+export const getAllUsers = async (page = 1, limit = 10) => {
+    const response = await client.get<PaginatedResponse<User>>('/users', {
+        params: { page, limit },
+    });
+    return response.data;
+};
+
+export const getUserById = async (id: string) => {
+    const response = await client.get<SingleResponse<User>>(`/users/${id}`);
+    return response.data;
+};
+
+export const updateUser = async (id: string, data: UpdateUserPayload) => {
+    const response = await client.put<SingleResponse<User>>(`/users/${id}`, data);
+    return response.data;
+};
+
+export const deleteUser = async (id: string) => {
+    const response = await client.delete(`/users/${id}`);
+    return response.data;
+};
+
+export const changePassword = async (id: string, data: ChangePasswordPayload) => {
+    const response = await client.patch(`/users/${id}/password`, data);
+    return response.data;
+};

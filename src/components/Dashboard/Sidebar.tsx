@@ -19,6 +19,7 @@ import { Link, useLocation } from 'react-router-dom';
 interface SidebarProps {
     isCollapsed: boolean;
     onToggle: () => void;
+    onItemClick?: () => void;
 }
 
 const SidebarItem = ({
@@ -26,16 +27,19 @@ const SidebarItem = ({
     label,
     href,
     active = false,
-    isCollapsed
+    isCollapsed,
+    onClick
 }: {
     icon: any,
     label: string,
     href: string,
     active?: boolean,
-    isCollapsed: boolean
+    isCollapsed: boolean,
+    onClick?: () => void
 }) => (
     <Link
         to={href}
+        onClick={onClick}
         className={`flex items-center ${isCollapsed ? 'justify-center px-2' : 'gap-3 px-4'} py-3 rounded-full cursor-pointer transition-all duration-300 group relative ${active ? 'bg-brand-navy text-white' : 'text-gray-500 hover:bg-gray-100'}`}
     >
         <Icon size={20} className="shrink-0" />
@@ -51,7 +55,7 @@ const SidebarItem = ({
     </Link>
 );
 
-const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
+const Sidebar = ({ isCollapsed, onToggle, onItemClick }: SidebarProps) => {
     const location = useLocation();
 
     const items = [
@@ -87,13 +91,14 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
                         href={item.href}
                         active={location.pathname === item.href}
                         isCollapsed={isCollapsed}
+                        onClick={onItemClick}
                     />
                 ))}
             </div>
 
             <div className={`p-2 border-t border-gray-100 space-y-1 ${isCollapsed ? '' : 'px-4'}`}>
-                <SidebarItem icon={Settings} label="Settings" href="/settings" active={location.pathname === '/settings'} isCollapsed={isCollapsed} />
-                <SidebarItem icon={LogOut} label="Logout" href="/logout" isCollapsed={isCollapsed} />
+                <SidebarItem icon={Settings} label="Settings" href="/profile" active={location.pathname === '/profile'} isCollapsed={isCollapsed} onClick={onItemClick} />
+                <SidebarItem icon={LogOut} label="Logout" href="/logout" isCollapsed={isCollapsed} onClick={onItemClick} />
             </div>
         </div>
     );

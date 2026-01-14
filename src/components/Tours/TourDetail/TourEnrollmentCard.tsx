@@ -1,7 +1,27 @@
-import { Users, Calendar, Eye, Users2, ArrowRight, Heart } from 'lucide-react';
+import { MapPin, Calendar, Clock, Users2, ArrowRight, Heart } from 'lucide-react';
 import Button from '../../common/Button';
+import { type Tour } from '../../../lib/api/tours';
+import { useShowInterest, useRemoveInterest } from '../../../hooks/useTours';
 
-const TourEnrollmentCard = () => {
+interface TourEnrollmentCardProps {
+    tour: Tour;
+}
+
+const TourEnrollmentCard = ({ tour }: TourEnrollmentCardProps) => {
+    const showInterestMutation = useShowInterest();
+    const removeInterestMutation = useRemoveInterest();
+
+    const isInterested = tour.isInterested || false;
+    const isLoading = showInterestMutation.isPending || removeInterestMutation.isPending;
+
+    const handleToggleInterest = () => {
+        if (isInterested) {
+            removeInterestMutation.mutate(tour._id);
+        } else {
+            showInterestMutation.mutate(tour._id);
+        }
+    };
+
     return (
         <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 sticky top-24">
             <div className="flex items-center justify-between mb-6">
@@ -13,19 +33,19 @@ const TourEnrollmentCard = () => {
             <div className="mb-8">
                 <span className="text-gray-500 text-sm block mb-1">Pricing</span>
                 <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-extrabold text-brand-blue-text">₹7200</span>
-                    <span className="text-gray-400 text-sm">/all-in</span>
+                    <span className="text-4xl font-extrabold text-brand-blue-text">₹{tour.price}</span>
+                    <span className="text-gray-400 text-sm line-through">₹{tour.price + 1000}</span>
                 </div>
             </div>
 
             <div className="space-y-5 mb-8">
                 <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-brand-blue">
-                        <Users size={20} />
+                        <MapPin size={20} />
                     </div>
                     <div>
-                        <p className="text-[10px] text-gray-500 font-bold uppercase">Registration</p>
-                        <p className="text-sm font-bold text-gray-800">22</p>
+                        <p className="text-[10px] text-gray-500 font-bold uppercase">Location</p>
+                        <p className="text-sm font-bold text-gray-800">{tour.location}</p>
                     </div>
                 </div>
 
@@ -34,30 +54,32 @@ const TourEnrollmentCard = () => {
                         <Calendar size={20} />
                     </div>
                     <div>
-                        <p className="text-[10px] text-gray-500 font-bold uppercase">Registration Deadline</p>
-                        <p className="text-sm font-bold text-gray-800">07 Feb 26</p>
+                        <p className="text-[10px] text-gray-500 font-bold uppercase">Booking Deadline</p>
+                        <p className="text-sm font-bold text-gray-800">{tour.bookingDeadline}</p>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center text-cyan-600">
-                        <Eye size={20} />
+                        <Clock size={20} />
                     </div>
                     <div>
-                        <p className="text-[10px] text-gray-500 font-bold uppercase">Impressions</p>
-                        <p className="text-sm font-bold text-gray-800">254</p>
+                        <p className="text-[10px] text-gray-500 font-bold uppercase">Duration</p>
+                        <p className="text-sm font-bold text-gray-800">{tour.duration}</p>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
-                        <Users2 size={20} />
+                {tour.interestedUsersCount !== undefined && (
+                    <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                            <Users2 size={20} />
+                        </div>
+                        <div>
+                            <p className="text-[10px] text-gray-500 font-bold uppercase">Interests</p>
+                            <p className="text-sm font-bold text-gray-800">{tour.interestedUsersCount} people interested</p>
+                        </div>
                     </div>
-                    <div>
-                        <p className="text-[10px] text-gray-500 font-bold uppercase">Availability</p>
-                        <p className="text-sm font-bold text-gray-800">Only 12 slot left</p>
-                    </div>
-                </div>
+                )}
             </div>
 
             <div className="space-y-3">
@@ -67,9 +89,16 @@ const TourEnrollmentCard = () => {
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </span>
                 </Button>
-                <button className="w-full py-3 border border-gray-200 rounded-2xl flex items-center justify-center gap-2 text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors">
-                    Show Interest
-                    <Heart size={18} />
+                <button
+                    onClick={handleToggleInterest}
+                    disabled={isLoading}
+                    className={`w-full py-3 border rounded-2xl flex items-center justify-center gap-2 font-bold text-sm transition-colors ${isInterested
+                        ? 'bg-brand-orange text-white border-brand-orange'
+                        : 'border-gray-200 text-gray-600 hover:bg-gray-50'
+                        }`}
+                >
+                    {isInterested ? 'Remove Interest' : 'Show Interest'}
+                    <Heart size={18} fill={isInterested ? "currentColor" : "none"} />
                 </button>
             </div>
         </div>

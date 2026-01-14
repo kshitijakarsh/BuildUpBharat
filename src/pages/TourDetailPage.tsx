@@ -1,14 +1,41 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ChevronRight, MapPin, ArrowLeft } from 'lucide-react';
+import { useTour } from '../hooks/useTours';
 import TourEnrollmentCard from '../components/Tours/TourDetail/TourEnrollmentCard';
 import TourItinerary from '../components/Tours/TourDetail/TourItinerary';
 import SafetyBanner from '../components/Tours/TourDetail/SafetyBanner';
 import FAQSection from '../components/Tours/FAQSection';
 
 const TourDetailPage = () => {
+    const { id } = useParams<{ id: string }>();
+    const { data: response, isLoading, isError, error } = useTour(id || '');
+
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center min-h-[60vh]">
+                <div className="w-16 h-16 border-4 border-brand-orange border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
+    if (isError || !response?.data) {
+        return (
+            <div className="max-w-xl mx-auto py-20 text-center space-y-6">
+                <div className="bg-red-50 text-red-600 p-6 rounded-3xl border border-red-100 italic font-medium">
+                    {isError ? `Error: ${(error as any)?.message || 'Failed to load tour details'}` : 'Tour not found'}
+                </div>
+                <Link to="/tours" className="inline-flex items-center gap-2 text-brand-blue font-bold hover:underline">
+                    <ArrowLeft size={18} />
+                    Back to all tours
+                </Link>
+            </div>
+        );
+    }
+
+    const tour = response.data;
 
     return (
-        <div className=" min-h-screen">
+        <div className="pb-20">
             {/* Breadcrumbs */}
             <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Link to="/tours" className="flex items-center gap-2 hover:text-brand-blue transition-colors">
@@ -16,7 +43,7 @@ const TourDetailPage = () => {
                     Tours
                 </Link>
                 <ChevronRight size={14} />
-                <span className="text-gray-800 font-medium">Varanasi Tour</span>
+                <span className="text-gray-800 font-medium">{tour.title}</span>
             </div>
 
             <div className='w-full h-px bg-gray-500 my-4'></div>
@@ -31,39 +58,34 @@ const TourDetailPage = () => {
                             <div className="absolute inset-0 bg-brand-orange/20 mix-blend-overlay pointer-events-none group-hover:bg-brand-orange/30 transition-colors duration-500"></div>
 
                             <img
-                                src="https://images.unsplash.com/photo-1561059488-916d69792237?q=80&w=2000&auto=format&fit=crop"
-                                alt="Varanasi Tour"
+                                src={tour.image}
+                                alt={tour.title}
                                 className="w-full h-[300px] md:h-[450px] object-cover"
                             />
 
                             <div className="absolute top-6 left-6">
                                 <span className="bg-white/90 backdrop-blur-md text-brand-blue px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
-                                    Educational Tour
+                                    {tour.category}
                                 </span>
                             </div>
                         </div>
 
                         <div className="space-y-6">
                             <h1 className="text-4xl md:text-5xl font-black text-[#1E1E1E] leading-[1.1]">
-                                Varanasi Cultural Heritage
+                                {tour.title}
                             </h1>
 
                             <div className="flex items-center gap-2 text-gray-500 font-bold">
                                 <MapPin size={20} className="text-brand-orange" />
-                                <span>Northern India</span>
+                                <span>{tour.location}</span>
                             </div>
 
                             <p className="text-sm md:text-lg italic text-[#666666] leading-relaxed border-l-4 border-brand-orange-light pl-6 py-1">
-                                "One of the most transformative experiences for students seeking to understand Bharat's cultural and technological pulse."
+                                "{tour.tagline}"
                             </p>
 
-                            <div className="text-gray-600 space-y-4 text-sm md:text-base leading-relaxed">
-                                <p>
-                                    A deep dive into the spiritual capital of India, this program offers an immersive journey through Varanasi's timeless heritage, living traditions, and sacred landscapes. Witness ancient rituals along the ghats, explore centuries-old craft and weaving communities, and engage with the stories that shape the city's cultural identity.
-                                </p>
-                                <p>
-                                    More than just sightseeing, this tour functions as a thoughtfully curated learning experience — blending field exploration, expert interactions, and reflective discussions to spark curiosity, build meaningful connections, and inspire cultural appreciation among India's brightest young minds.
-                                </p>
+                            <div className="text-gray-600 space-y-4 text-sm md:text-base leading-relaxed whitespace-pre-wrap">
+                                {tour.description}
                             </div>
                         </div>
                     </section>
@@ -74,13 +96,7 @@ const TourDetailPage = () => {
                             Program Highlights
                         </h2>
                         <ul className="grid grid-cols-1 gap-4">
-                            {[
-                                "Guided walks through Varanasi's historic ghats and heritage neighborhoods",
-                                "Interactive workshops with local historians and cultural practitioners",
-                                "Visit to Sarnath — birthplace of one of Buddhism's earliest teachings",
-                                "Hands-on exposure to traditional crafts, music, and regional cuisine",
-                                "Evening Ganga Aarti experience and reflection sessions"
-                            ].map((item) => (
+                            {tour.highlights.map((item) => (
                                 <li key={item} className="flex items-start gap-3 text-gray-700 font-medium">
                                     <span className="text-brand-orange text-xl mt-[-2px]">•</span>
                                     {item}
@@ -90,7 +106,7 @@ const TourDetailPage = () => {
                     </section>
 
                     {/* Itinerary */}
-                    <TourItinerary />
+                    <TourItinerary data={tour.itinerary} />
 
                     {/* Safety Banner */}
                     <SafetyBanner />
@@ -106,7 +122,7 @@ const TourDetailPage = () => {
 
                 {/* Sidebar - Enrollment Card */}
                 <div className="lg:col-span-4 relative">
-                    <TourEnrollmentCard />
+                    <TourEnrollmentCard tour={tour} />
                 </div>
             </div>
         </div>

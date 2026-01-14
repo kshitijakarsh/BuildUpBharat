@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import DashboardLayout from './layouts/DashboardLayout';
+import ComingSoon from './components/common/ComingSoon';
 
 // Lazy load pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -34,6 +35,19 @@ function App() {
               <Route path="/tours" element={<ToursPage />} />
               <Route path="/tours/:id" element={<TourDetailPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+
+              {/* Unimplemented Sidebar Routes */}
+              <Route path="/courses" element={<ComingSoon />} />
+              <Route path="/career" element={<ComingSoon />} />
+              <Route path="/mock-test" element={<ComingSoon />} />
+              <Route path="/mentorship" element={<ComingSoon />} />
+              <Route path="/quiz" element={<ComingSoon />} />
+              <Route path="/events" element={<ComingSoon />} />
+              <Route path="/workshops" element={<ComingSoon />} />
+              <Route path="/stories" element={<ComingSoon />} />
+              <Route path="/help" element={<ComingSoon />} />
+              <Route path="/settings" element={<ComingSoon />} />
+              <Route path="/coming-soon" element={<ComingSoon />} />
             </Route>
 
             <Route path="/login" element={<LoginPage />} />

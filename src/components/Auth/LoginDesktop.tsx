@@ -8,7 +8,11 @@ import Input from '../common/Input'
 import { useLogin } from '../../hooks/useAuth'
 import { loginSchema, type LoginFormValues } from './schemas'
 
-const LoginDesktop: React.FC = () => {
+interface LoginDesktopProps {
+    onForgotPassword?: () => void
+}
+
+const LoginDesktop: React.FC<LoginDesktopProps> = ({ onForgotPassword }) => {
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
     const loginMutation = useLogin()
@@ -96,7 +100,11 @@ const LoginDesktop: React.FC = () => {
                                 />
                                 <span className="ml-2 text-sm text-gray-600 group-hover:text-gray-800 transition-colors">Remember me</span>
                             </label>
-                            <button type="button" onClick={() => navigate('/forgot-password')} className="text-sm text-gray-500 hover:text-brand-highlight hover:underline font-medium">
+                            <button
+                                type="button"
+                                onClick={() => onForgotPassword ? onForgotPassword() : navigate('/forgot-password')}
+                                className="text-sm text-gray-500 hover:text-brand-highlight hover:underline font-medium"
+                            >
                                 Forgot Password?
                             </button>
                         </div>
