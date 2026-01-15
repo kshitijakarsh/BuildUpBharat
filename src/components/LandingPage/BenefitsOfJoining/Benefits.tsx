@@ -1,10 +1,10 @@
 import React from "react";
 import SectionHeader from "../../common/SectionHeader";
 import BenefitItem from "./BenefitItem";
-import CareerGrowth from '@/assets/benefits/CareerGrowth.svg'
-import NetworkingOpportunities from '@/assets/benefits/NetworkingOpportunities.svg'
-import MentorshipSupport from '@/assets/benefits/MentorshipSupport.svg'
-import Funding from '@/assets/benefits/Funding.svg'
+import career_growth from '@/assets/benefits/career_growth.svg'
+import networking from '@/assets/benefits/Networking.svg'
+import mentorship from '@/assets/benefits/Mentorship.svg'
+import funding from '@/assets/benefits/Funding.svg'
 
 const Benefits: React.FC = () => {
     return (
@@ -24,28 +24,28 @@ const Benefits: React.FC = () => {
                     <BenefitItem
                         title="Career Growth"
                         description="Develop essential career, leadership, and professional skills through learning programs, workshops, and real-world exposure."
-                        imageSrc={CareerGrowth}
+                        imageSrc={career_growth}
                         imageAlign="left"
                     />
 
                     <BenefitItem
                         title="Networking Opportunities"
                         description="Connect with motivated students, peers, and like-minded youth across India through community-driven engagement."
-                        imageSrc={NetworkingOpportunities}
+                        imageSrc={networking}
                         imageAlign="right"
                     />
 
                     <BenefitItem
                         title="Mentorship Support"
                         description="Get guidance, insights, and direction from mentors and experienced professionals to help shape your personal and professional journey."
-                        imageSrc={MentorshipSupport}
+                        imageSrc={mentorship}
                         imageAlign="left"
                     />
 
                     <BenefitItem
                         title="Funding & Startup Exposure"
                         description="Access information, awareness, and opportunities related to startup growth, innovation programs, and entrepreneurial initiatives."
-                        imageSrc={Funding}
+                        imageSrc={funding}
                         imageAlign="right"
                     />
                 </div>

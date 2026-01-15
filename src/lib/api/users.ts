@@ -11,6 +11,7 @@ export interface User {
     createdAt: string;
     updatedAt: string;
     profileImage?: string;
+    membership?: string;
     education?: {
         level?: string;
         degree?: string;
@@ -32,6 +33,7 @@ export interface UpdateUserPayload {
     email?: string;
     mobileNumber?: string;
     profileImage?: string;
+    membership?: string;
     education?: {
         level?: string;
         degree?: string;

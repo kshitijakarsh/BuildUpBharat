@@ -81,7 +81,6 @@ const Sidebar = ({ isCollapsed, onToggle, onItemClick }: SidebarProps) => {
         { icon: Trophy, label: "Quiz Zone", href: "/quiz" },
         { icon: Calendar, label: "Events", href: "/events" },
         { icon: Users, label: "Workshops", href: "/workshops" },
-        { icon: Trophy, label: "Success Stories", href: "/stories" },
         { icon: HelpCircle, label: "Help Desk", href: "/help" },
     ];
 

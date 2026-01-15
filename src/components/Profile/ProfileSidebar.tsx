@@ -1,4 +1,4 @@
-import { User, GraduationCap, MapPin, Shield, ChevronRight, Camera, Mail } from "lucide-react";
+import { User, GraduationCap, MapPin, Shield, ChevronRight, Camera, Mail, Crown } from "lucide-react";
 import { useProfile } from "../../hooks/useAuth";
 import profileSvg from "../../assets/profile.svg";
 
@@ -30,7 +30,7 @@ const ProfileSidebar = ({ activeTab, setActiveTab }: ProfileSidebarProps) => {
                                 src={profile?.profileImage || profileSvg}
                                 alt="User profile"
                                 className="w-full h-full object-cover"
-                            />  
+                            />
                         </div>
                         <button className="absolute -bottom-2 -right-2 p-1.5 bg-brand-orange text-white rounded-lg shadow-md hover:bg-orange-600 transition-colors z-20">
                             <Camera size={16} />
@@ -40,6 +40,11 @@ const ProfileSidebar = ({ activeTab, setActiveTab }: ProfileSidebarProps) => {
                     <div className="mt-4 flex items-center gap-2 text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
                         <Mail size={14} className="text-gray-400" />
                         <span className="text-xs font-medium">{profile?.email}</span>
+                    </div>
+
+                    <div className="mt-2 flex items-center gap-2 text-white bg-brand-blue px-3 py-1.5 rounded-full border border-brand-blue">
+                        <Crown size={14} className="text-yellow-300" />
+                        <span className="text-xs font-semibold tracking-wide">{profile?.membership || "Free Plan"}</span>
                     </div>
                 </div>
             </div>

@@ -22,8 +22,8 @@ const DashboardLayout = () => {
                         />
                     </div>
                 </aside>
-                <main className="flex-1 p-0 md:px-8 overflow-y-auto w-full h-[calc(100vh-80px)]">
-                    <div className="max-w-7xl mx-auto py-6">
+                <main className="flex-1 overflow-y-auto w-full">
+                    <div className="max-w-7xl mx-auto py-6 md:px-8">
                         <Outlet />
                     </div>
                     <div className="border-t border-gray-100">

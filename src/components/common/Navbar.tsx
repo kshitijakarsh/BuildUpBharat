@@ -128,7 +128,7 @@ const DashboardNavbar = ({
         <div className="flex items-center gap-4">
           <button
             onClick={toggleMenu}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600"
+            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} className="text-brand-orange" /> : <Menu size={24} className="text-brand-orange" />}
