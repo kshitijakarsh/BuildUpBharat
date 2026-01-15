@@ -2,8 +2,8 @@ import React from "react";
 import SectionHeader from "../../common/SectionHeader";
 import BenefitItem from "./BenefitItem";
 import career_growth from '@/assets/benefits/career_growth.svg'
-import networking from '@/assets/benefits/Networking.svg'
-import mentorship from '@/assets/benefits/Mentorship.svg'
+import networking from '@/assets/benefits/networking.svg'
+import mentorship from '@/assets/benefits/mentorship.svg'
 import funding from '@/assets/benefits/Funding.svg'
 
 const Benefits: React.FC = () => {
