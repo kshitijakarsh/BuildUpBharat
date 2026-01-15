@@ -62,6 +62,7 @@ const LandingNavbar = ({
         >
           {isMenuOpen ? <X size={24} className="text-brand-orange" /> : <Menu size={24} className="text-brand-orange" />}
         </button>
+
         <Logo />
       </div>
 
@@ -72,16 +73,24 @@ const LandingNavbar = ({
       </div>
 
       <div>
-        <Link to="/register">
-          <Button variant="primary" size="sm">
-            Register
-          </Button>
-        </Link>
+        {useAuthStore((state) => state.user) ? (
+          <Link to="/dashboard">
+            <Button variant="primary" size="sm">
+              Go to Dashboard
+            </Button>
+          </Link>
+        ) : (
+          <Link to="/register">
+            <Button variant="primary" size="sm">
+              Register
+            </Button>
+          </Link>
+        )}
       </div>
     </nav>
 
     {/* Mobile Menu Drawer */}
-    <div
+    < div
       className={`fixed inset-0 z-60 md:hidden transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
     >
       <div
@@ -101,14 +110,22 @@ const LandingNavbar = ({
           ))}
         </div>
         <div className="mt-auto pt-8 border-t border-gray-100">
-          <Link to="/register" onClick={toggleMenu}>
-            <Button variant="primary" fullWidth>
-              Register Now
-            </Button>
-          </Link>
+          {useAuthStore((state) => state.user) ? (
+            <Link to="/dashboard" onClick={toggleMenu}>
+              <Button variant="primary" fullWidth>
+                Go to Dashboard
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/register" onClick={toggleMenu}>
+              <Button variant="primary" fullWidth>
+                Register Now
+              </Button>
+            </Link>
+          )}
         </div>
       </aside>
-    </div>
+    </div >
   </>
 );
 
