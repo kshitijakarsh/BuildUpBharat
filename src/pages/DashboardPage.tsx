@@ -40,7 +40,7 @@ const DashboardPage = () => {
 
     return (
         <div className="space-y-6">
-            <MembershipModal isOpen={isMembershipModalOpen} onClose={() => setIsMembershipModalOpen(false)} />
+            {/* <MembershipModal isOpen={isMembershipModalOpen} onClose={() => setIsMembershipModalOpen(false)} /> */}
 
             <WelcomeBanner />
             <QuickAccessHub />
