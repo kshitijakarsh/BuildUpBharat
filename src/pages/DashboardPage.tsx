@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import WelcomeBanner from '../components/Dashboard/WelcomeBanner';
 import QuickAccessHub from '../components/Dashboard/QuickAccessHub';
 import FeaturedSection from '../components/Dashboard/FeaturedSection';
@@ -7,19 +7,18 @@ import TrustedUniversities from '../components/Dashboard/TrustedUniversities';
 import OpportunityList from '../components/Dashboard/OpportunityList';
 import MockTestSection from '../components/Dashboard/MockTestSection';
 import SuccessStats from '../components/Dashboard/SuccessStats';
-import MembershipModal from '../components/Dashboard/MembershipModal';
+// import MembershipModal from '../components/Dashboard/MembershipModal';
 import logo from "@/assets/logo.svg"
 
 const DashboardPage = () => {
-    const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
+    // const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
 
-    useEffect(() => {
-        // Show modal briefly after mount
-        const timer = setTimeout(() => {
-            setIsMembershipModalOpen(true);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, []);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setIsMembershipModalOpen(true);
+    //     }, 1000);
+    //     return () => clearTimeout(timer);
+    // }, []);
 
     const internships = [
         { logo: logo, role: "Software Engineer Intern", company: "BuildUp Bharat", location: "Noida" },
