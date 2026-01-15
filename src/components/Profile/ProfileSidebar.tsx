@@ -1,4 +1,6 @@
 import { User, GraduationCap, MapPin, Shield, ChevronRight, Camera, Mail } from "lucide-react";
+import { useProfile } from "../../hooks/useAuth";
+import profileSvg from "../../assets/profile.svg";
 
 interface ProfileSidebarProps {
     activeTab: string;
@@ -13,6 +15,8 @@ const MENU_ITEMS = [
 ];
 
 const ProfileSidebar = ({ activeTab, setActiveTab }: ProfileSidebarProps) => {
+    const { data: response } = useProfile();
+    const profile = response?.data;
     return (
         <div className="w-full md:w-80 bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm h-fit">
             {/* Top Banner & Profile Image */}
@@ -23,10 +27,10 @@ const ProfileSidebar = ({ activeTab, setActiveTab }: ProfileSidebarProps) => {
                         <div className="w-24 h-24 rounded-2xl border-4 border-white shadow-lg overflow-hidden relative">
                             <div className="absolute inset-0 border-2 border-brand-blue-start rounded-xl z-10 pointer-events-none"></div>
                             <img
-                                src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=200&auto=format&fit=crop"
+                                src={profile?.profileImage || profileSvg}
                                 alt="User profile"
                                 className="w-full h-full object-cover"
-                            />
+                            />  
                         </div>
                         <button className="absolute -bottom-2 -right-2 p-1.5 bg-brand-orange text-white rounded-lg shadow-md hover:bg-orange-600 transition-colors z-20">
                             <Camera size={16} />
@@ -35,7 +39,7 @@ const ProfileSidebar = ({ activeTab, setActiveTab }: ProfileSidebarProps) => {
 
                     <div className="mt-4 flex items-center gap-2 text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
                         <Mail size={14} className="text-gray-400" />
-                        <span className="text-xs font-medium">aryansharma009@gmail.com</span>
+                        <span className="text-xs font-medium">{profile?.email}</span>
                     </div>
                 </div>
             </div>

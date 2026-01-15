@@ -1,7 +1,64 @@
-import { Globe, MapPin, Building2, Home, Save } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Globe, MapPin, Building2, Home, Save, Loader2 } from "lucide-react";
 import Button from "../common/Button";
+import { useProfile } from "../../hooks/useAuth";
+import { useUpdateUser } from "../../hooks/useUsers";
 
 const LocationDetailsForm = () => {
+    const { data: response, isLoading: isProfileLoading } = useProfile();
+    const updateUserMutation = useUpdateUser();
+    const profile = response?.data;
+
+    const [country, setCountry] = useState("-");
+    const [state, setState] = useState("-");
+    const [city, setCity] = useState("-");
+    const [pinCode, setPinCode] = useState("-");
+    const [address, setAddress] = useState("-");
+    const [successMessage, setSuccessMessage] = useState("");
+
+    useEffect(() => {
+        if (profile?.location) {
+            setCountry(profile.location.country || "-");
+            setState(profile.location.state || "-");
+            setCity(profile.location.city || "-");
+            setPinCode(profile.location.pinCode || "-");
+            setAddress(profile.location.address || "-");
+        }
+    }, [profile]);
+
+    const handleSave = () => {
+        if (!profile) return;
+
+        updateUserMutation.mutate(
+            {
+                id: profile._id,
+                data: {
+                    location: {
+                        country: country === "-" ? "" : country,
+                        state: state === "-" ? "" : state,
+                        city: city === "-" ? "" : city,
+                        pinCode: pinCode === "-" ? "" : pinCode,
+                        address: address === "-" ? "" : address,
+                    }
+                }
+            },
+            {
+                onSuccess: () => {
+                    setSuccessMessage("Location details updated successfully!");
+                    setTimeout(() => setSuccessMessage(""), 3000);
+                }
+            }
+        );
+    };
+
+    if (isProfileLoading) {
+        return (
+            <div className="flex-1 bg-white rounded-[2.5rem] border border-gray-100 p-8 md:p-12 shadow-sm flex items-center justify-center min-h-[400px]">
+                <Loader2 className="w-10 h-10 text-brand-blue animate-spin" />
+            </div>
+        );
+    }
+
     return (
         <div className="flex-1 bg-white rounded-[2.5rem] border border-gray-100 p-8 md:p-12 shadow-sm relative overflow-hidden">
             {/* Background Decorative Icon */}
@@ -11,10 +68,16 @@ const LocationDetailsForm = () => {
 
             <div className="flex justify-between items-start mb-10 relative z-10">
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2 font-['Outfit']">Location Details</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2 ">Location Details</h2>
                     <p className="text-gray-500 font-medium">Update your profile to stay relevant in the Indian ecosystem.</p>
                 </div>
             </div>
+
+            {successMessage && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-100 text-green-600 rounded-2xl font-medium animate-in fade-in slide-in-from-top-2 relative z-10">
+                    {successMessage}
+                </div>
+            )}
 
             <div className="space-y-8 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
@@ -27,7 +90,8 @@ const LocationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="India"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -42,7 +106,8 @@ const LocationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="Delhi NCR"
+                                value={state}
+                                onChange={(e) => setState(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -57,7 +122,8 @@ const LocationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="Noida"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -72,7 +138,8 @@ const LocationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="110092"
+                                value={pinCode}
+                                onChange={(e) => setPinCode(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -88,7 +155,8 @@ const LocationDetailsForm = () => {
                         </div>
                         <input
                             type="text"
-                            defaultValue="A-Block, Near Cross River Mall, Noida, Delhi, Pin Code: 110092"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                             className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                         />
                     </div>
@@ -96,9 +164,18 @@ const LocationDetailsForm = () => {
             </div>
 
             <div className="mt-12 flex justify-end relative z-10">
-                <Button variant="primary" className="bg-[#2D3AE4] hover:bg-blue-700 px-8 py-3.5 flex items-center gap-3 shadow-lg shadow-blue-100">
-                    <Save size={20} />
-                    Save Changes
+                <Button
+                    onClick={handleSave}
+                    disabled={updateUserMutation.isPending}
+                    variant="primary"
+                    className="bg-[#2D3AE4] hover:bg-blue-700 px-8 py-3.5 flex items-center gap-3 shadow-lg shadow-blue-100 disabled:opacity-70"
+                >
+                    {updateUserMutation.isPending ? (
+                        <Loader2 size={20} className="animate-spin" />
+                    ) : (
+                        <Save size={20} />
+                    )}
+                    {updateUserMutation.isPending ? "Saving..." : "Save Changes"}
                 </Button>
             </div>
         </div>

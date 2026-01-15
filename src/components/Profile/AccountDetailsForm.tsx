@@ -4,12 +4,12 @@ import Button from "../common/Button";
 import { useProfile } from "../../hooks/useAuth";
 import { useUpdateUser } from "../../hooks/useUsers";
 
-const INTERESTS = [
-    "UI/UX Design",
-    "Web Development",
-    "AI/ML",
-    "Product Management",
-];
+// const INTERESTS = [
+//     "UI/UX Design",
+//     "Web Development",
+//     "AI/ML",
+//     "Product Management",
+// ];
 
 const AccountDetailsForm = () => {
     const { data: response, isLoading: isProfileLoading } = useProfile();
@@ -57,7 +57,7 @@ const AccountDetailsForm = () => {
         <div className="flex-1 bg-white rounded-[2.5rem] border border-gray-100 p-8 md:p-12 shadow-sm">
             <div className="flex justify-between items-start mb-10">
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2 font-['Outfit']">Account Details</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Account Details</h2>
                     <p className="text-gray-500 font-medium">Update your profile to stay relevant in the Indian ecosystem.</p>
                 </div>
                 <div className="hidden md:flex w-16 h-16 rounded-2xl items-center justify-center">
@@ -98,7 +98,7 @@ const AccountDetailsForm = () => {
                         <input
                             type="email"
                             disabled
-                            value={profile?.email || ""}
+                            value={profile?.email || "-"}
                             className="w-full bg-white border border-gray-200 rounded-2xl py-3.5 pl-12 pr-12 text-gray-400 font-medium cursor-not-allowed outline-none"
                         />
                         <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-400">
@@ -133,7 +133,7 @@ const AccountDetailsForm = () => {
                         <input
                             type="text"
                             disabled
-                            value={profile?.role === 'admin' ? "Administrator" : "User"}
+                            value={!profile?.role ? "-" : (profile.role === 'admin' ? "Administrator" : "User")}
                             className="w-full bg-white border border-gray-200 rounded-2xl py-3.5 pl-12 pr-4 text-gray-400 font-medium cursor-not-allowed outline-none"
                         />
                         <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-400">
@@ -147,14 +147,14 @@ const AccountDetailsForm = () => {
             <div className="mt-10 space-y-4">
                 <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Interest</label>
                 <div className="flex flex-wrap gap-3">
-                    {INTERESTS.map((interest) => (
+                    {/* {INTERESTS.map((interest) => (
                         <div
                             key={interest}
                             className="px-5 py-2 rounded-full border border-blue-200 text-[#3D4EE1] font-semibold text-xs transition-colors hover:bg-blue-50 cursor-pointer"
                         >
                             {interest}
                         </div>
-                    ))}
+                    ))} */}
                     <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-gray-400 font-semibold text-xs hover:bg-gray-50 transition-colors">
                         <Plus size={14} />
                         Add Interest

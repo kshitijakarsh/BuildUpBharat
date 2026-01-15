@@ -10,12 +10,42 @@ export interface User {
     role: 'user' | 'admin';
     createdAt: string;
     updatedAt: string;
+    profileImage?: string;
+    education?: {
+        level?: string;
+        degree?: string;
+        course?: string;
+        yearOfGraduation?: string;
+        studentId?: string;
+    };
+    location?: {
+        country?: string;
+        state?: string;
+        city?: string;
+        pinCode?: string;
+        address?: string;
+    };
 }
 
 export interface UpdateUserPayload {
     fullName?: string;
     email?: string;
     mobileNumber?: string;
+    profileImage?: string;
+    education?: {
+        level?: string;
+        degree?: string;
+        course?: string;
+        yearOfGraduation?: string;
+        studentId?: string;
+    };
+    location?: {
+        country?: string;
+        state?: string;
+        city?: string;
+        pinCode?: string;
+        address?: string;
+    };
 }
 
 export interface ChangePasswordPayload {

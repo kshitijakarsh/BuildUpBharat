@@ -1,4 +1,4 @@
-import { ChevronRight, MapPin } from 'lucide-react';
+import { ChevronRight, MapPin, Lock } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
@@ -39,7 +39,10 @@ interface OpportunityListProps {
     id: string; // unique id for navigation
 }
 
-const OpportunityList = ({ title, items, id }: OpportunityListProps) => {
+const OpportunityList = ({ title, items: _, id }: OpportunityListProps) => {
+    // Force empty array as requested
+    const displayItems: OpportunityCardProps[] = [];
+
     const nextClass = `opp-next-${id}`;
     const prevClass = `opp-prev-${id}`;
 
@@ -52,37 +55,49 @@ const OpportunityList = ({ title, items, id }: OpportunityListProps) => {
                 <a href="#" className="text-sm font-semibold text-blue-500 hover:text-blue-600 underline underline-offset-4">View All</a>
             </div>
 
-            <div className="relative group">
-                <Swiper
-                    modules={[Navigation]}
-                    spaceBetween={24}
-                    slidesPerView={1}
-                    centeredSlides={true}
-                    navigation={{
-                        nextEl: `.${nextClass}`,
-                        prevEl: `.${prevClass}`,
-                    }}
-                    breakpoints={{
-                        640: { slidesPerView: 1.5, centeredSlides: false },
-                        768: { slidesPerView: 2, centeredSlides: false },
-                        1024: { slidesPerView: 2.5, centeredSlides: false },
-                    }}
-                    className="pb-4 px-12 md:px-0"
-                >
-                    {items.map((item, i) => (
-                        <SwiperSlide key={i} className="h-auto">
-                            <OpportunityCard {...item} />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+            <div className="relative min-h-[200px] rounded-3xl overflow-hidden border border-gray-100 bg-gray-50/50">
+                {displayItems.length > 0 ? (
+                    <div className="relative group p-6">
+                        <Swiper
+                            modules={[Navigation]}
+                            spaceBetween={24}
+                            slidesPerView={1}
+                            centeredSlides={true}
+                            navigation={{
+                                nextEl: `.${nextClass}`,
+                                prevEl: `.${prevClass}`,
+                            }}
+                            breakpoints={{
+                                640: { slidesPerView: 1.5, centeredSlides: false },
+                                768: { slidesPerView: 2, centeredSlides: false },
+                                1024: { slidesPerView: 2.5, centeredSlides: false },
+                            }}
+                            className="pb-4 px-12 md:px-0"
+                        >
+                            {displayItems.map((item, i) => (
+                                <SwiperSlide key={i} className="h-auto">
+                                    <OpportunityCard {...item} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
 
-                {/* Navigation Buttons */}
-                <button className={`${prevClass} absolute -left-1 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
-                    <ChevronRight size={20} className="rotate-180 text-gray-600" />
-                </button>
-                <button className={`${nextClass} absolute -right-1 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
-                    <ChevronRight size={20} className="text-gray-600" />
-                </button>
+                        {/* Navigation Buttons */}
+                        <button className={`${prevClass} absolute -left-1 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
+                            <ChevronRight size={20} className="rotate-180 text-gray-600" />
+                        </button>
+                        <button className={`${nextClass} absolute -right-1 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0`}>
+                            <ChevronRight size={20} className="text-gray-600" />
+                        </button>
+                    </div>
+                ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-md bg-white/40">
+                        <div className="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center mb-4 text-brand-orange">
+                            <Lock size={32} />
+                        </div>
+                        <h3 className="text-xl font-bold text-brand-blue-text">Coming Soon</h3>
+                        <p className="text-gray-500 font-medium text-sm mt-1">We are working on adding new opportunities.</p>
+                    </div>
+                )}
             </div>
         </div>
     );

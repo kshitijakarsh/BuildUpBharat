@@ -1,6 +1,7 @@
 
 import dashboard from '../../assets/dashboard.svg';
 import Button from '../common/Button';
+import { useAuthStore } from '../../store/authStore';
 
 const WelcomeBanner = () => {
     return (
@@ -8,7 +9,7 @@ const WelcomeBanner = () => {
             <div className="flex-1 z-10 min-w-0 pr-2">
                 <h1 className="text-lg md:text-3xl font-bold text-brand-blue-text mb-1 md:mb-2 leading-tight">
                     Welcome back, <br className="hidden md:block" />
-                    <span className="whitespace-nowrap">Aryan Sharma !</span>
+                    {useAuthStore((state) => state.user?.fullName)}
                 </h1>
                 <p className="text-gray-600 mb-3 md:mb-6 mt-1 md:mt-4 text-xs md:text-base leading-relaxed max-w-[90%]">
                     Ready to continue your journey? Let's keep learning <br className="hidden md:block" /> and building your future.

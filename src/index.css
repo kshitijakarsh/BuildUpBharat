@@ -24,6 +24,17 @@
   --color-brand-highlight: #5B4EFF;
   --color-brand-purple-light: #7C87F3;
   --color-brand-gray-light: #999999;
+  
+  --animate-scroll: scroll 30s linear infinite;
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @layer base {
@@ -33,5 +44,10 @@
   
   section[id] {
     scroll-margin-top: 80px;
+  }
+
+  .mask-linear-fade {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
 }

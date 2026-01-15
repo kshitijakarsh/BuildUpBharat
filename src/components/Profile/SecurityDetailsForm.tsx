@@ -70,7 +70,7 @@ const SecurityDetailsForm = () => {
 
             <div className="flex justify-between items-start mb-10 relative z-10">
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2 font-['Outfit']">Security Details</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Security Details</h2>
                     <p className="text-gray-500 font-medium">Update your profile to stay relevant in the Indian ecosystem.</p>
                 </div>
             </div>

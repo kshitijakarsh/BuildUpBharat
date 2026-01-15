@@ -1,7 +1,64 @@
-import { GraduationCap, BookOpen, Briefcase, Calendar, Contact2, Save } from "lucide-react";
+import { useState, useEffect } from "react";
+import { GraduationCap, BookOpen, Briefcase, Calendar, Contact2, Save, Loader2 } from "lucide-react";
 import Button from "../common/Button";
+import { useProfile } from "../../hooks/useAuth";
+import { useUpdateUser } from "../../hooks/useUsers";
 
 const EducationDetailsForm = () => {
+    const { data: response, isLoading: isProfileLoading } = useProfile();
+    const updateUserMutation = useUpdateUser();
+    const profile = response?.data;
+
+    const [level, setLevel] = useState("-");
+    const [degree, setDegree] = useState("-");
+    const [course, setCourse] = useState("-");
+    const [year, setYear] = useState("-");
+    const [studentId, setStudentId] = useState("-");
+    const [successMessage, setSuccessMessage] = useState("");
+
+    useEffect(() => {
+        if (profile?.education) {
+            setLevel(profile.education.level || "-");
+            setDegree(profile.education.degree || "-");
+            setCourse(profile.education.course || "-");
+            setYear(profile.education.yearOfGraduation || "-");
+            setStudentId(profile.education.studentId || "-");
+        }
+    }, [profile]);
+
+    const handleSave = () => {
+        if (!profile) return;
+
+        updateUserMutation.mutate(
+            {
+                id: profile._id,
+                data: {
+                    education: {
+                        level: level === "-" ? "" : level,
+                        degree: degree === "-" ? "" : degree,
+                        course: course === "-" ? "" : course,
+                        yearOfGraduation: year === "-" ? "" : year,
+                        studentId: studentId === "-" ? "" : studentId,
+                    }
+                }
+            },
+            {
+                onSuccess: () => {
+                    setSuccessMessage("Education details updated successfully!");
+                    setTimeout(() => setSuccessMessage(""), 3000);
+                }
+            }
+        );
+    };
+
+    if (isProfileLoading) {
+        return (
+            <div className="flex-1 bg-white rounded-[2.5rem] border border-gray-100 p-8 md:p-12 shadow-sm flex items-center justify-center min-h-[400px]">
+                <Loader2 className="w-10 h-10 text-brand-blue animate-spin" />
+            </div>
+        );
+    }
+
     return (
         <div className="flex-1 bg-white rounded-[2.5rem] border border-gray-100 p-8 md:p-12 shadow-sm relative overflow-hidden">
             {/* Background Decorative Icon */}
@@ -11,10 +68,16 @@ const EducationDetailsForm = () => {
 
             <div className="flex justify-between items-start mb-10 relative z-10">
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2 font-['Outfit']">Education Details</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Education Details</h2>
                     <p className="text-gray-500 font-medium">Update your profile to stay relevant in the Indian ecosystem.</p>
                 </div>
             </div>
+
+            {successMessage && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-100 text-green-600 rounded-2xl font-medium animate-in fade-in slide-in-from-top-2 relative z-10">
+                    {successMessage}
+                </div>
+            )}
 
             <div className="space-y-8 relative z-10">
                 {/* Education Level / University */}
@@ -26,7 +89,8 @@ const EducationDetailsForm = () => {
                         </div>
                         <input
                             type="text"
-                            defaultValue="Indian Institute of Technology, Delhi"
+                            value={level}
+                            onChange={(e) => setLevel(e.target.value)}
                             className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                         />
                     </div>
@@ -42,7 +106,8 @@ const EducationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="B.Tech"
+                                value={degree}
+                                onChange={(e) => setDegree(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -57,7 +122,8 @@ const EducationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="Information Technology"
+                                value={course}
+                                onChange={(e) => setCourse(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -72,7 +138,8 @@ const EducationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="2027"
+                                value={year}
+                                onChange={(e) => setYear(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -87,7 +154,8 @@ const EducationDetailsForm = () => {
                             </div>
                             <input
                                 type="text"
-                                defaultValue="IITD/2023/0258"
+                                value={studentId}
+                                onChange={(e) => setStudentId(e.target.value)}
                                 className="w-full bg-white border border-[#2D3AE4]/30 rounded-full py-3.5 pl-12 pr-4 text-gray-700 font-medium focus:ring-1 focus:ring-brand-blue-start/20 focus:border-brand-blue-start outline-none transition-all shadow-sm"
                             />
                         </div>
@@ -96,9 +164,18 @@ const EducationDetailsForm = () => {
             </div>
 
             <div className="mt-12 flex justify-end relative z-10">
-                <Button variant="primary" className="bg-[#2D3AE4] hover:bg-blue-700 px-8 py-3.5 flex items-center gap-3 shadow-lg shadow-blue-100">
-                    <Save size={20} />
-                    Save Changes
+                <Button
+                    onClick={handleSave}
+                    disabled={updateUserMutation.isPending}
+                    variant="primary"
+                    className="bg-[#2D3AE4] hover:bg-blue-700 px-8 py-3.5 flex items-center gap-3 shadow-lg shadow-blue-100 disabled:opacity-70"
+                >
+                    {updateUserMutation.isPending ? (
+                        <Loader2 size={20} className="animate-spin" />
+                    ) : (
+                        <Save size={20} />
+                    )}
+                    {updateUserMutation.isPending ? "Saving..." : "Save Changes"}
                 </Button>
             </div>
         </div>

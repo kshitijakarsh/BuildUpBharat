@@ -1,8 +1,7 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Lock } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import Button from '../common/Button';
-import logo from "@/assets/logo.svg"
 
 const MockTestCard = ({ title, questions, duration, icon }: any) => (
     <div className="bg-white p-6 rounded-2xl border border-gray-100 flex flex-col items-center text-center transition-all h-full group">
@@ -21,32 +20,8 @@ const MockTestCard = ({ title, questions, duration, icon }: any) => (
 );
 
 const MockTestSection = () => {
-    const tests = [
-        {
-            title: "IIT - JEE",
-            questions: "75",
-            duration: "30 min",
-            icon: logo
-        },
-        {
-            title: "NEET",
-            questions: "75",
-            duration: "30 min",
-            icon: logo
-        },
-        {
-            title: "SSC GD",
-            questions: "75",
-            duration: "30 min",
-            icon: logo
-        },
-        {
-            title: "UPSC",
-            questions: "100",
-            duration: "60 min",
-            icon: logo
-        }
-    ];
+    // Empty array as requested
+    const tests: any[] = [];
 
     return (
         <div className="mt-12 relative">
@@ -57,37 +32,48 @@ const MockTestSection = () => {
                 <a href="#" className="text-sm font-semibold text-blue-500 hover:text-blue-600 underline underline-offset-4">View All</a>
             </div>
 
-            <div className="relative group">
-                <Swiper
-                    modules={[Navigation]}
-                    spaceBetween={24}
-                    slidesPerView={1}
-                    centeredSlides={true}
-                    navigation={{
-                        nextEl: ".mock-next",
-                        prevEl: ".mock-prev",
-                    }}
-                    breakpoints={{
-                        640: { slidesPerView: 2, centeredSlides: false },
-                        768: { slidesPerView: 3, centeredSlides: false },
-                        1024: { slidesPerView: 4, centeredSlides: false }, // 4 cards on desktop
-                    }}
-                    className="pb-4 px-12 md:px-2"
-                >
-                    {tests.map((test, i) => (
-                        <SwiperSlide key={i}>
-                            <MockTestCard {...test} />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+            <div className="relative min-h-[300px] rounded-3xl overflow-hidden border border-gray-100 bg-gray-50/50">
+                {tests.length > 0 ? (
+                    <div className="relative group p-6">
+                        <Swiper
+                            modules={[Navigation]}
+                            spaceBetween={24}
+                            slidesPerView={1}
+                            centeredSlides={true}
+                            navigation={{
+                                nextEl: ".mock-next",
+                                prevEl: ".mock-prev",
+                            }}
+                            breakpoints={{
+                                640: { slidesPerView: 2, centeredSlides: false },
+                                768: { slidesPerView: 3, centeredSlides: false },
+                                1024: { slidesPerView: 4, centeredSlides: false },
+                            }}
+                            className="pb-4 px-12 md:px-2"
+                        >
+                            {tests.map((test, i) => (
+                                <SwiperSlide key={i}>
+                                    <MockTestCard {...test} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
 
-                {/* Navigation Buttons - Reused style */}
-                <button className="mock-prev absolute -left-1 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0">
-                    <ChevronRight size={20} className="rotate-180 text-gray-600" />
-                </button>
-                <button className="mock-next absolute -right-1 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0">
-                    <ChevronRight size={20} className="text-gray-600" />
-                </button>
+                        <button className="mock-prev absolute -left-1 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0">
+                            <ChevronRight size={20} className="rotate-180 text-gray-600" />
+                        </button>
+                        <button className="mock-next absolute -right-1 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-all cursor-pointer disabled:opacity-0">
+                            <ChevronRight size={20} className="text-gray-600" />
+                        </button>
+                    </div>
+                ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-md bg-white/40">
+                        <div className="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center mb-4 text-brand-orange">
+                            <Lock size={32} />
+                        </div>
+                        <h3 className="text-xl font-bold text-brand-blue-text">Coming Soon</h3>
+                        <p className="text-gray-500 font-medium text-sm mt-1">We are working on adding new tests.</p>
+                    </div>
+                )}
             </div>
         </div>
     );

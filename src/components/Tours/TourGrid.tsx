@@ -21,7 +21,8 @@ const TourGrid = () => {
         );
     }
 
-    const tours = response?.data || [];
+    const tours = Array.isArray(response?.data) ? response.data :
+        (Array.isArray(response) ? response : []);
 
     if (tours.length === 0) {
         return (

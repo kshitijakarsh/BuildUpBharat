@@ -25,6 +25,7 @@ export interface AuthResponse {
 
 export const registerUi = async (data: RegisterPayload) => {
     const response = await client.post<AuthResponse>('/auth/register', data);
+    console.log(response.data);
     return response.data;
 };
 

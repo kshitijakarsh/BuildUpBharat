@@ -14,7 +14,8 @@ import {
     ChevronRight,
     Map
 } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLogout } from '../../hooks/useAuth';
 
 interface SidebarProps {
     isCollapsed: boolean;
@@ -35,7 +36,7 @@ const SidebarItem = ({
     href: string,
     active?: boolean,
     isCollapsed: boolean,
-    onClick?: () => void
+    onClick?: (e?: React.MouseEvent) => void
 }) => (
     <Link
         to={href}
@@ -57,6 +58,18 @@ const SidebarItem = ({
 
 const Sidebar = ({ isCollapsed, onToggle, onItemClick }: SidebarProps) => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const logout = useLogout();
+
+    const handleLogout = (e?: React.MouseEvent) => {
+        e?.preventDefault();
+        logout.mutate(undefined, {
+            onSuccess: () => {
+                navigate('/');
+            }
+        });
+        if (onItemClick) onItemClick();
+    };
 
     const items = [
         { icon: LayoutDashboard, label: "Explore", href: "/dashboard" },
@@ -98,7 +111,7 @@ const Sidebar = ({ isCollapsed, onToggle, onItemClick }: SidebarProps) => {
 
             <div className={`p-2 border-t border-gray-100 space-y-1 ${isCollapsed ? '' : 'px-4'}`}>
                 <SidebarItem icon={Settings} label="Settings" href="/profile" active={location.pathname === '/profile'} isCollapsed={isCollapsed} onClick={onItemClick} />
-                <SidebarItem icon={LogOut} label="Logout" href="/logout" isCollapsed={isCollapsed} onClick={onItemClick} />
+                <SidebarItem icon={LogOut} label="Logout" href="/logout" isCollapsed={isCollapsed} onClick={handleLogout} />
             </div>
         </div>
     );
