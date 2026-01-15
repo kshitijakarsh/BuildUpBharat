@@ -2,8 +2,13 @@ import React from "react";
 import rightSvg from "@/assets/right.svg";
 import Button from "../../common/Button";
 import { HeroVisuals } from "./HeroVisuals";
+import { useAuthStore } from "../../../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const Hero: React.FC = () => {
+    const user = useAuthStore((state) => state.user);
+    const navigate = useNavigate();
+
     return (
         <section id="home" className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-linear-to-br from-brand-blue-start to-brand-blue-end text-white px-6 pb-10 pt-20 md:pt-0">
             <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10 w-full">
@@ -22,10 +27,18 @@ const Hero: React.FC = () => {
                     </header>
 
                     <nav className="flex flex-row gap-3">
-                        <Button variant="primary">
-                            Register Now
-                        </Button>
-                        <Button variant="outline">
+                        {!user && (
+                            <Button
+                                variant="primary"
+                                onClick={() => navigate("/register")}
+                            >
+                                Register Now
+                            </Button>
+                        )}
+                        <Button
+                            variant="outline"
+                            onClick={() => navigate(user ? "/dashboard" : "/register")}
+                        >
                             Explore Benefits
                         </Button>
                     </nav>
