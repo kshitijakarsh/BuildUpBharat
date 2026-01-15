@@ -1,7 +1,8 @@
-import { ChevronRight, Lock } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import Button from '../common/Button';
+import ComingSoonPlaceholder from '../common/ComingSoonPlaceholder';
 
 const MockTestCard = ({ title, questions, duration, icon }: any) => (
     <div className="bg-white p-6 rounded-2xl border border-gray-100 flex flex-col items-center text-center transition-all h-full group">
@@ -66,13 +67,9 @@ const MockTestSection = () => {
                         </button>
                     </div>
                 ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-md bg-white/40">
-                        <div className="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center mb-4 text-brand-orange">
-                            <Lock size={32} />
-                        </div>
-                        <h3 className="text-xl font-bold text-brand-blue-text">Coming Soon</h3>
-                        <p className="text-gray-500 font-medium text-sm mt-1">We are working on adding new tests.</p>
-                    </div>
+                    <ComingSoonPlaceholder
+                        message="We are working on adding new tests."
+                    />
                 )}
             </div>
         </div>

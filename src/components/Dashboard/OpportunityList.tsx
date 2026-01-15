@@ -1,4 +1,5 @@
-import { ChevronRight, MapPin, Lock } from 'lucide-react';
+import { ChevronRight, MapPin } from 'lucide-react';
+import ComingSoonPlaceholder from '../common/ComingSoonPlaceholder';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
@@ -90,13 +91,9 @@ const OpportunityList = ({ title, items: _, id }: OpportunityListProps) => {
                         </button>
                     </div>
                 ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-md bg-white/40">
-                        <div className="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center mb-4 text-brand-orange">
-                            <Lock size={32} />
-                        </div>
-                        <h3 className="text-xl font-bold text-brand-blue-text">Coming Soon</h3>
-                        <p className="text-gray-500 font-medium text-sm mt-1">We are working on adding new opportunities.</p>
-                    </div>
+                    <ComingSoonPlaceholder
+                        message="We are working on adding new opportunities."
+                    />
                 )}
             </div>
         </div>

@@ -9,6 +9,7 @@ import {
 } from '../lib/api/auth';
 import { useAuthStore } from '../store/authStore';
 import Cookies from 'js-cookie';
+import { toast } from 'sonner';
 
 export const useRegister = () => {
     const setUser = useAuthStore((state) => state.setUser);
@@ -18,7 +19,11 @@ export const useRegister = () => {
             if (data?.data?.token) {
                 Cookies.set('token', data.data.token, { expires: 7 }); // Expires in 7 days
                 setUser(data.data.user);
+                toast.success('Registration successful! Welcome aboard.');
             }
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
         },
     });
 };
@@ -31,7 +36,11 @@ export const useLogin = () => {
             if (data?.data?.token) {
                 Cookies.set('token', data.data.token, { expires: 7 });
                 setUser(data.data.user);
+                toast.success('Login successful!');
             }
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message || 'Login failed. Please check your credentials.');
         },
     });
 };
@@ -51,6 +60,10 @@ export const useLogout = () => {
         onSuccess: () => {
             Cookies.remove('token');
             logoutStore();
+            toast.success('Logged out successfully');
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message || 'Logout failed');
         },
     });
 };

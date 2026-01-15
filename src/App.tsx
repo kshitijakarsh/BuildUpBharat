@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout';
 import DashboardLayout from './layouts/DashboardLayout';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import ComingSoon from './components/common/ComingSoon';
+import { Toaster } from 'sonner';
 
 // Lazy load pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -57,6 +58,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
           </Routes>
         </Suspense>
+        <Toaster position="top-right" richColors />
       </div>
     </Router>
   )
