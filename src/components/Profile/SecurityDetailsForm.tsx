@@ -36,7 +36,7 @@ const SecurityDetailsForm = () => {
             return;
         }
 
-        const userId = profileResponse?.data._id;
+        const userId = profileResponse?.data._id || profileResponse?.data.id;
         if (!userId) return;
 
         changePasswordMutation.mutate(

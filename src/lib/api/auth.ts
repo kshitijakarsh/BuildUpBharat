@@ -43,3 +43,18 @@ export const logoutUi = async () => {
     const response = await client.post('/auth/logout');
     return response.data;
 };
+
+export const forgotPasswordUi = async (data: { email: string }) => {
+    const response = await client.post('/auth/forgot-password', data);
+    return response.data;
+};
+
+export const verifyOtpUi = async (data: { email: string, otp: string }) => {
+    const response = await client.post('/auth/verify-otp', data);
+    return response.data;
+};
+
+export const resetPasswordUi = async (data: { email: string, otp: string, newPassword: string, confirmPassword: string }) => {
+    const response = await client.post('/auth/reset-password', data);
+    return response.data;
+};

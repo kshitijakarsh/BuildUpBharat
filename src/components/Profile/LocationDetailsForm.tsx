@@ -17,12 +17,12 @@ const LocationDetailsForm = () => {
     const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
-        if (profile?.location) {
-            setCountry(profile.location.country || "-");
-            setState(profile.location.state || "-");
-            setCity(profile.location.city || "-");
-            setPinCode(profile.location.pinCode || "-");
-            setAddress(profile.location.address || "-");
+        if (profile) {
+            setCountry(profile.country || "-");
+            setState(profile.state || "-");
+            setCity(profile.city || "-");
+            setPinCode(profile.pinCode || "-");
+            setAddress(profile.fullAddress || "-");
         }
     }, [profile]);
 
@@ -31,15 +31,13 @@ const LocationDetailsForm = () => {
 
         updateUserMutation.mutate(
             {
-                id: profile._id,
+                id: profile._id || profile.id!,
                 data: {
-                    location: {
-                        country: country === "-" ? "" : country,
-                        state: state === "-" ? "" : state,
-                        city: city === "-" ? "" : city,
-                        pinCode: pinCode === "-" ? "" : pinCode,
-                        address: address === "-" ? "" : address,
-                    }
+                    country: country === "-" ? "" : country,
+                    state: state === "-" ? "" : state,
+                    city: city === "-" ? "" : city,
+                    pinCode: pinCode === "-" ? "" : pinCode,
+                    fullAddress: address === "-" ? "" : address,
                 }
             },
             {

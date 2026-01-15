@@ -4,6 +4,9 @@ import {
     loginUi,
     getProfileUi,
     logoutUi,
+    forgotPasswordUi,
+    verifyOtpUi,
+    resetPasswordUi,
     type RegisterPayload,
     type LoginPayload,
 } from '../lib/api/auth';
@@ -64,6 +67,42 @@ export const useLogout = () => {
         },
         onError: (error: any) => {
             toast.error(error.response?.data?.message || 'Logout failed');
+        },
+    });
+};
+
+export const useForgotPassword = () => {
+    return useMutation({
+        mutationFn: (data: { email: string }) => forgotPasswordUi(data),
+        onSuccess: () => {
+            toast.success('OTP sent to your email');
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message || 'Failed to send OTP');
+        },
+    });
+};
+
+export const useVerifyOtp = () => {
+    return useMutation({
+        mutationFn: (data: { email: string, otp: string }) => verifyOtpUi(data),
+        onSuccess: () => {
+            toast.success('OTP verified successfully');
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message || 'Failed to verify OTP');
+        },
+    });
+};
+
+export const useResetPassword = () => {
+    return useMutation({
+        mutationFn: (data: { email: string, otp: string, newPassword: string, confirmPassword: string }) => resetPasswordUi(data),
+        onSuccess: () => {
+            toast.success('Password reset successful! You can now login with your new password.');
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message || 'Failed to reset password');
         },
     });
 };

@@ -33,7 +33,7 @@ const AccountDetailsForm = () => {
 
         updateUserMutation.mutate(
             {
-                id: profile._id,
+                id: profile._id || profile.id!,
                 data: { fullName, mobileNumber }
             },
             {

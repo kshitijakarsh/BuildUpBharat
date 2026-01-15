@@ -17,12 +17,12 @@ const EducationDetailsForm = () => {
     const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
-        if (profile?.education) {
-            setLevel(profile.education.level || "-");
-            setDegree(profile.education.degree || "-");
-            setCourse(profile.education.course || "-");
-            setYear(profile.education.yearOfGraduation || "-");
-            setStudentId(profile.education.studentId || "-");
+        if (profile) {
+            setLevel(""); // 'level' is not present in the new flat structure or Postman, defaulting to empty or removing if unused
+            setDegree(profile.degree || "-");
+            setCourse(profile.course || "-");
+            setYear(profile.graduationYear?.toString() || profile.yearOfGraduation || "-");
+            setStudentId(profile.studentId || "-");
         }
     }, [profile]);
 
@@ -31,15 +31,12 @@ const EducationDetailsForm = () => {
 
         updateUserMutation.mutate(
             {
-                id: profile._id,
+                id: profile._id || profile.id!,
                 data: {
-                    education: {
-                        level: level === "-" ? "" : level,
-                        degree: degree === "-" ? "" : degree,
-                        course: course === "-" ? "" : course,
-                        yearOfGraduation: year === "-" ? "" : year,
-                        studentId: studentId === "-" ? "" : studentId,
-                    }
+                    degree: degree === "-" ? "" : degree,
+                    course: course === "-" ? "" : course,
+                    graduationYear: year === "-" ? undefined : Number(year),
+                    studentId: studentId === "-" ? "" : studentId,
                 }
             },
             {
