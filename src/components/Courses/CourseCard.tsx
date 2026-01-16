@@ -11,6 +11,8 @@ interface CourseCardProps {
     discount: number;
 }
 
+
+
 export default function CourseCard({ courseImage, courseTitle, bestSeller, author, description, rating, ratedBy, discount }: CourseCardProps) {
     return (
         <div className='flex flex-col gap-2'>

@@ -3,6 +3,10 @@ import mock_course from "@/assets/mock_course.jpg";
 import Tabs from "../components/Courses/Tabs";
 import { Search } from "lucide-react";
 import courses from '@/assets/courses.svg'
+import EducatorCard from "../components/Courses/Educator";
+import FAQSection from "../components/Tours/FAQSection";
+import ProBanner from "../components/Dashboard/ProBanner";
+
 
 interface CourseCardProps {
     courseImage: string;
@@ -14,6 +18,31 @@ interface CourseCardProps {
     ratedBy: number;
     discount: number;
 }
+
+interface EducatorProps {
+    educatorImage: string;
+    educatorName: string;
+    educatorExpertise: string;
+}
+
+export const mockEducators: EducatorProps[] = [
+    {
+        educatorImage: mock_course,
+        educatorName: "Ankit Verma",
+        educatorExpertise: "Senior UI/UX Designer",
+    },
+    {
+        educatorImage: mock_course,
+        educatorName: "Neha Sharma",
+        educatorExpertise: "Frontend Engineer",
+    },
+    {
+        educatorImage: mock_course,
+        educatorName: "Rohit Mehta",
+        educatorExpertise: "Illustrator & Visual Designer",
+    },
+];
+
 
 export const mockCourses: CourseCardProps[] = [
     {
@@ -109,6 +138,21 @@ export default function CoursesPage() {
                     <CourseCard key={index} {...course} />
                 ))}
             </div>
+
+            <div className="flex flex-col py-6">
+                <p className="text-lg font-semibold">Popular Instructor</p>
+                <p className="text-sm text-gray-500 leading-3">We know the best things for You. Top picks for You.</p>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 px-24">
+                {mockEducators.map((educator, index) => (
+                    <EducatorCard key={index} {...educator} />
+                ))}
+            </div>
+
+
+            <ProBanner />
+            <FAQSection />
         </div >
     );
 }
