@@ -14,6 +14,7 @@ const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const ToursPage = lazy(() => import('./pages/ToursPage'));
 const TourDetailPage = lazy(() => import('./pages/TourDetailPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const CoursePage = lazy(() => import('./pages/CoursesPage'))
 
 
 // Loading fallback
@@ -40,7 +41,7 @@ function App() {
                 <Route path="/profile" element={<ProfilePage />} />
 
                 {/* Unimplemented Sidebar Routes */}
-                <Route path="/courses" element={<ComingSoon />} />
+                <Route path="/courses" element={<CoursePage />} />
                 <Route path="/career" element={<ComingSoon />} />
                 <Route path="/mock-test" element={<ComingSoon />} />
                 <Route path="/mentorship" element={<ComingSoon />} />
