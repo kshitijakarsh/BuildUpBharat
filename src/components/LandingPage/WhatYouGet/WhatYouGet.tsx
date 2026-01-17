@@ -1,6 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import tours from "@assets/whatyouget/tours.svg";
+import courses from "@assets/whatyouget/courses.svg";
+import jobsinternships from "@assets/whatyouget/jobsinternships.svg";
+import events from "@assets/whatyouget/events.svg";
+import mentors from "@assets/whatyouget/mentors&guidance.svg";
+import workshops from "@assets/whatyouget/workshops.svg";
+import quiz from "@assets/whatyouget/quiz.svg";
+import helpdesk from "@assets/whatyouget/helpdesk.svg";
 
 import "swiper/swiper-bundle.css";
 
@@ -37,43 +44,43 @@ const WHAT_YOU_GET_DATA: WhatYouGetItem[] = [
         title: "Courses",
         description:
             "Learn through structured programs covering communication, entrepreneurship, leadership, etc. Includes live Zoom sessions, activity-based learning, and downloadable certificates.",
-        imageSrc: tours,
+        imageSrc: courses,
     },
     {
         title: "Jobs & Internships",
         description:
             "Access updated internship and opportunity listings where students can apply based on role, sector, and interest areas — helping them gain exposure and experience.",
-        imageSrc: tours,
+        imageSrc: jobsinternships,
     },
     {
         title: "Events & Startup Updates",
         description:
             "Stay updated with information about startup events, entrepreneurship news, awareness programs, and innovation-driven event participation.",
-        imageSrc: tours,
+        imageSrc: events,
     },
     {
         title: "Mentors & Guidance",
         description:
             "Seek guidance and direction from experienced professionals and industry mentors to help shape your personal and professional growth journey.",
-        imageSrc: tours,
+        imageSrc: mentors,
     },
     {
         title: "Workshops & Skill Sessions",
         description:
             "Participate in specialized hands-on workshops and skill-building sessions designed to bridge the gap between classroom learning and industry requirements.",
-        imageSrc: tours,
+        imageSrc: workshops,
     },
     {
         title: "Quiz Competitions",
         description:
             "Test your knowledge and sharpen your cognitive skills through regular quiz competitions covering various domains, aptitude, and general awareness.",
-        imageSrc: tours,
+        imageSrc: quiz,
     },
     {
         title: "Query Support & Helpdesk",
         description:
             "Get prompt assistance regarding course registrations, certificates, program details, and general queries through our dedicated support helpdesk.",
-        imageSrc: tours,
+        imageSrc: helpdesk,
     },
 ];
 
@@ -90,14 +97,14 @@ const WhatYouGet = () => {
                     Build<span className="text-brand-orange">Up</span> Bharat
                 </SectionHeader>
 
-                <div className="relative mx-auto max-w-5xl px-0 md:px-4 lg:px-12">
+                <div className="relative mx-auto px-0 md:px-4 lg:px-12">
                     <div
-                        className="absolute -top-4 -z-10 hidden h-20 w-20 rounded-2xl bg-brand-orange lg:block"
+                        className="absolute -top-2 -left-1 -z-10 hidden h-20 w-20 rounded-2xl bg-brand-orange lg:block"
                         aria-hidden="true"
                     />
 
                     <div
-                        className="absolute bottom-1 right-1 -z-10 hidden h-20 w-24 rounded-2xl bg-brand-blue-end lg:block"
+                        className="absolute -bottom-2 -right-1 -z-10 hidden h-20 w-24 rounded-2xl bg-brand-blue-end lg:block"
                         aria-hidden="true"
                     />
 
