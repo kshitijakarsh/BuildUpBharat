@@ -9,6 +9,7 @@ import ProBanner from "../components/Dashboard/ProBanner";
 
 
 interface CourseCardProps {
+    id: string;
     courseImage: string;
     courseTitle: string;
     bestSeller: boolean;
@@ -46,6 +47,7 @@ export const mockEducators: EducatorProps[] = [
 
 export const mockCourses: CourseCardProps[] = [
     {
+        id: "adobe-illustrator",
         courseImage: mock_course,
         courseTitle: "Adobe Illustrator Scratch Course",
         bestSeller: true,
@@ -57,6 +59,7 @@ export const mockCourses: CourseCardProps[] = [
         discount: 10,
     },
     {
+        id: "ui-design-figma",
         courseImage: mock_course,
         courseTitle: "UI Design Fundamentals with Figma",
         bestSeller: false,
@@ -68,6 +71,7 @@ export const mockCourses: CourseCardProps[] = [
         discount: 20,
     },
     {
+        id: "advanced-react",
         courseImage: mock_course,
         courseTitle: "Advanced React & Component Patterns",
         bestSeller: true,
@@ -79,6 +83,7 @@ export const mockCourses: CourseCardProps[] = [
         discount: 15,
     },
     {
+        id: "tailwind-mastery",
         courseImage: mock_course,
         courseTitle: "Complete Tailwind CSS Mastery",
         bestSeller: false,
@@ -90,6 +95,7 @@ export const mockCourses: CourseCardProps[] = [
         discount: 0,
     },
     {
+        id: "nextjs-deep-dive",
         courseImage: mock_course,
         courseTitle: "Next.js App Router Deep Dive",
         bestSeller: true,
