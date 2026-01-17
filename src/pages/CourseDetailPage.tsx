@@ -7,6 +7,7 @@ import CourseHero from '../components/Courses/CourseHero';
 import CourseStats from '../components/Courses/CourseStats';
 import CourseHeader from '../components/Courses/CourseHeader';
 import AboutCourse from '../components/Courses/AboutCourse';
+import AboutPublisher from '../components/Courses/AboutPublisher';
 
 const CourseDetailPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -44,6 +45,7 @@ const CourseDetailPage = () => {
             <CourseHeader />
             <AboutCourse />
             <CourseContent />
+            <AboutPublisher />
 
 
             <div className='bg-brand-pale-blue/10'>

@@ -72,7 +72,7 @@ export default function AboutCourse() {
                     <div className="flex flex-col gap-6">
                         {courseBullets.map((bullet, index) => (
                             <div key={index} className="flex gap-4 items-start">
-                                <div className="shrink-0 bg-linear-to-b from-[#3758B2] to-[#3C1147] p-2.5 rounded-lg shadow-sm">
+                                <div className="shrink-0 bg-linear-to-b from-icon-gradient-start to-icon-gradient-end p-2.5 rounded-lg shadow-sm">
                                     <bullet.icon size={20} className="text-white" />
                                 </div>
                                 <div>
