@@ -40,7 +40,7 @@ const WelcomeBanner = () => {
                         {shouldShowCompleteProfile && (
                             <Button
                                 variant="outline"
-                                className="py-2 px-4 text-xs md:text-base md:py-3 md:px-6 text-brand-blue-text border-brand-blue-text hover:bg-brand-blue-text/10"
+                                className="py-2 px-4 text-xs md:text-base md:py-3 md:px-6 text-brand-blue-text border-brand-blue-text"
                                 onClick={() => navigate('/profile')}
                             >
                                 Complete Profile
