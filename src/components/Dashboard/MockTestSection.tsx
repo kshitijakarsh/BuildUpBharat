@@ -21,13 +21,12 @@ const MockTestCard = ({ title, questions, duration, icon }: any) => (
 );
 
 const MockTestSection = () => {
-    // Empty array as requested
     const tests: any[] = [];
 
     return (
-        <div className="mt-12 relative">
+        <div className="mt-12 px-4 md:px-0 relative">
             <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-brand-blue-text border-l-4 border-brand-blue-text pl-3 leading-none">
+                <h2 className="text-xl md:text-2xl font-bold text-brand-blue-text border-l-4 border-brand-blue-text pl-3 leading-none">
                     Mock Test
                 </h2>
                 <a href="#" className="text-sm font-semibold text-blue-500 hover:text-blue-600 underline underline-offset-4">View All</a>

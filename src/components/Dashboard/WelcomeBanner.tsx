@@ -26,11 +26,14 @@ const WelcomeBanner = () => {
                 </p>
                 <div className="space-y-4">
                     {shouldShowCompleteProfile && (
-                        <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden max-w-96 border border-gray-200">
-                            <div
-                                className={`h-full rounded-full ${overallPercentage > 50 ? "bg-green-500" : "bg-brand-orange"}`}
-                                style={{ width: `${overallPercentage}%` }}
-                            />
+                        <div className="flex items-center gap-3 max-w-96">
+                            <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden border border-gray-200">
+                                <div
+                                    className={`h-full rounded-full ${overallPercentage > 50 ? "bg-green-500" : "bg-brand-orange"}`}
+                                    style={{ width: `${overallPercentage}%` }}
+                                />
+                            </div>
+                            <span className="text-sm text-gray-700">{overallPercentage}%</span>
                         </div>
                     )}
                     <div className="flex items-center gap-3">

@@ -66,8 +66,8 @@ const FeaturedSection = () => {
     ];
 
     return (
-        <div className="mt-8 relative">
-            <h2 className="text-2xl font-bold text-brand-blue-text mb-6 border-l-4 border-brand-blue-text pl-3 leading-none">
+        <div className="mt-8 px-4 md:px-0 relative">
+            <h2 className="text-xl md:text-2xl font-bold text-brand-blue-text mb-6 border-l-4 border-brand-blue-text pl-3 leading-none">
                 Featured
             </h2>
 

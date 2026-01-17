@@ -48,9 +48,9 @@ const OpportunityList = ({ title, items: _, id }: OpportunityListProps) => {
     const prevClass = `opp-prev-${id}`;
 
     return (
-        <div className="mt-10 relative">
+        <div className="mt-10 px-4 md:px-0 relative">
             <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-brand-blue-text border-l-4 border-brand-blue-text pl-3 leading-none">
+                <h2 className="text-xl md:text-2xl font-bold text-brand-blue-text border-l-4 border-brand-blue-text pl-3 leading-none">
                     {title}
                 </h2>
                 <a href="#" className="text-sm font-semibold text-blue-500 hover:text-blue-600 underline underline-offset-4">View All</a>

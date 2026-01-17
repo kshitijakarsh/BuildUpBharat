@@ -29,9 +29,9 @@ const TrustedUniversities = () => {
 
     return (
         <div className="mt-12 text-center overflow-hidden">
-            <h3 className="text-2xl font-bold text-brand-blue-text mb-8">
+            <h2 className="text-xl md:text-2xl font-bold text-brand-blue-text mb-8">
                 Trusted by <span className="text-brand-orange">Universities</span>
-            </h3>
+            </h2>
 
             <div className="relative w-full overflow-hidden mask-linear-fade">
                 <div className="flex animate-scroll w-max">

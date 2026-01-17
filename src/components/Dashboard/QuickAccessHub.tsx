@@ -17,8 +17,8 @@ const QuickAccessItem = ({ icon: Icon, label, color }: { icon: any, label: strin
 
 const QuickAccessHub = () => {
     return (
-        <div className="mt-8">
-            <h2 className="text-xl font-bold text-brand-blue-text mb-4 border-l-4 border-brand-blue-text pl-3">Quick Access Hub</h2>
+        <div className="mt-8 px-4 md:px-0">
+            <h2 className="text-xl md:text-2xl font-bold text-brand-blue-text mb-4 border-l-4 border-brand-blue-text pl-3 leading-none">Quick Access Hub</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 <QuickAccessItem icon={Briefcase} label="Internship" color="bg-cyan-400" />
                 <QuickAccessItem icon={Briefcase} label="Jobs" color="bg-orange-400" />
