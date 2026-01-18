@@ -60,7 +60,23 @@ const FAQ_DATA = [
     }
 ];
 
-const FAQSection = () => {
+interface FAQSectionProps {
+    compact?: boolean;
+}
+
+const FAQSection = ({ compact = false }: FAQSectionProps) => {
+    const content = (
+        <div className={compact ? "space-y-0" : "max-w-4xl"}>
+            {FAQ_DATA.map((item, index) => (
+                <FAQItem key={index} {...item} />
+            ))}
+        </div>
+    );
+
+    if (compact) {
+        return content;
+    }
+
     return (
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
             <div className="mb-12 flex items-center gap-4">
@@ -69,12 +85,7 @@ const FAQSection = () => {
                     Frequently Asked Questions
                 </h2>
             </div>
-
-            <div className="max-w-4xl">
-                {FAQ_DATA.map((item, index) => (
-                    <FAQItem key={index} {...item} />
-                ))}
-            </div>
+            {content}
         </div>
     );
 };

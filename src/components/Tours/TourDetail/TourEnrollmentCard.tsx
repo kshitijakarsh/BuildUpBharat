@@ -16,9 +16,9 @@ const TourEnrollmentCard = ({ tour }: TourEnrollmentCardProps) => {
 
     const handleToggleInterest = () => {
         if (isInterested) {
-            removeInterestMutation.mutate(tour._id);
+            removeInterestMutation.mutate(tour.id);
         } else {
-            showInterestMutation.mutate(tour._id);
+            showInterestMutation.mutate(tour.id);
         }
     };
 

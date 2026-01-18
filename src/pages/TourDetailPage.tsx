@@ -35,7 +35,7 @@ const TourDetailPage = () => {
     const tour = response.data;
 
     return (
-        <div className="pb-20">
+        <div className="pb-20 px-4 md:px-0">
             {/* Breadcrumbs */}
             <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Link to="/tours" className="flex items-center gap-2 hover:text-brand-blue transition-colors">
@@ -48,7 +48,7 @@ const TourDetailPage = () => {
 
             <div className='w-full h-px bg-gray-500 my-4'></div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
                 {/* Main Content Area */}
                 <div className="lg:col-span-8 space-y-12">
                     {/* Hero Section */}
@@ -91,7 +91,7 @@ const TourDetailPage = () => {
                     </section>
 
                     {/* Program Highlights */}
-                    <section className="space-y-6 bg-blue-50/30 rounded-[32px] p-8 border border-blue-100/50">
+                    <section className="space-y-6 bg-blue-50/30 rounded-[32px] p-6 md:p-8 border border-blue-100/50">
                         <h2 className="text-3xl font-extrabold text-brand-blue-text border-l-4 border-brand-blue pl-4">
                             Program Highlights
                         </h2>
@@ -116,7 +116,7 @@ const TourDetailPage = () => {
                         <h2 className="text-3xl font-extrabold text-brand-blue-text border-l-4 border-brand-blue pl-4 mb-8">
                             Frequently Asked Questions
                         </h2>
-                        <FAQSection />
+                        <FAQSection compact />
                     </div>
                 </div>
 

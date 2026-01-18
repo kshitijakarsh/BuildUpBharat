@@ -10,7 +10,8 @@ export interface ItineraryItem {
 }
 
 export interface Tour {
-    _id: string;
+    id: string; // Changed from _id to id based on API response
+    _id?: string; // Keeping for backward compatibility if needed
     title: string;
     tagline: string;
     description: string;
@@ -27,6 +28,7 @@ export interface Tour {
     itinerary: ItineraryItem[];
     interestedUsersCount?: number;
     isInterested?: boolean;
+    isActive?: boolean;
     createdAt: string;
     updatedAt: string;
 }
@@ -50,8 +52,19 @@ export interface CreateTourPayload {
 
 export interface UpdateTourPayload extends Partial<CreateTourPayload> { }
 
+export interface GetToursResponse {
+    success: boolean;
+    message: string;
+    data: {
+        tours: Tour[];
+        total: number;
+        page: number;
+        totalPages: number;
+    }
+}
+
 export const getAllTours = async (page = 1, limit = 10, category?: string) => {
-    const response = await client.get<PaginatedResponse<Tour>>('/tours', {
+    const response = await client.get<GetToursResponse>('/tours', {
         params: { page, limit, category },
     });
     return response.data;

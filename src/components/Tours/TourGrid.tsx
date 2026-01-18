@@ -21,8 +21,7 @@ const TourGrid = () => {
         );
     }
 
-    const tours = Array.isArray(response?.data) ? response.data :
-        (Array.isArray(response) ? response : []);
+    const tours = response?.data?.tours || [];
 
     if (tours.length === 0) {
         return (
@@ -38,8 +37,7 @@ const TourGrid = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                 {tours.map((tour) => (
                     <TourCard
-                        key={tour._id}
-                        id={tour._id}
+                        key={tour.id}
                         {...tour}
                         originalPrice={tour.price + 1000}
                     />
