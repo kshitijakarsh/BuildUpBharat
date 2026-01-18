@@ -8,19 +8,17 @@ const DashboardLayout = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col">
+        <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
             <Navbar />
 
-            <div className="flex flex-1 relative">
+            <div className="flex flex-1 overflow-hidden relative">
                 <aside
-                    className={`hidden md:block border-r border-gray-100 bg-white transition-all duration-300 relative z-10 ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}
+                    className={`hidden md:block border-r border-gray-100 bg-white transition-all duration-300 z-10 ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}
                 >
-                    <div className="sticky top-0 overflow-visible">
-                        <Sidebar
-                            isCollapsed={isSidebarCollapsed}
-                            onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-                        />
-                    </div>
+                    <Sidebar
+                        isCollapsed={isSidebarCollapsed}
+                        onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+                    />
                 </aside>
                 <main className="flex-1 overflow-y-auto w-full">
                     <div className="max-w-7xl mx-auto py-6 md:px-8">

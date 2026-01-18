@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import WelcomeBanner from '../components/Dashboard/WelcomeBanner';
 import QuickAccessHub from '../components/Dashboard/QuickAccessHub';
 import FeaturedSection from '../components/Dashboard/FeaturedSection';
@@ -11,6 +11,12 @@ import SuccessStats from '../components/Dashboard/SuccessStats';
 import logo from "@/assets/logo.svg"
 
 const DashboardPage = () => {
+    const featuredRef = useRef<HTMLDivElement>(null);
+
+    const handleExploreClick = () => {
+        featuredRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
     // const [isMembershipModalOpen, setIsMembershipModalOpen] = useState(false);
 
     // useEffect(() => {
@@ -41,9 +47,11 @@ const DashboardPage = () => {
         <div className="space-y-6">
             {/* <MembershipModal isOpen={isMembershipModalOpen} onClose={() => setIsMembershipModalOpen(false)} /> */}
 
-            <WelcomeBanner />
+            <WelcomeBanner onExploreClick={handleExploreClick} />
             <QuickAccessHub />
-            <FeaturedSection />
+            <div ref={featuredRef}>
+                <FeaturedSection />
+            </div>
 
             <div className='w-full h-px bg-gray-500'></div>
 

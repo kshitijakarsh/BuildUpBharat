@@ -7,7 +7,11 @@ import { useProfile } from '../../hooks/useAuth';
 import { calculateProfileCompletion } from '../../utils/profileCompletion';
 
 
-const WelcomeBanner = () => {
+interface WelcomeBannerProps {
+    onExploreClick?: () => void;
+}
+
+const WelcomeBanner = ({ onExploreClick }: WelcomeBannerProps) => {
     const navigate = useNavigate();
     const { data: response } = useProfile();
     const profile = response?.data;
@@ -37,8 +41,12 @@ const WelcomeBanner = () => {
                         </div>
                     )}
                     <div className="flex items-center gap-3">
-                        <Button variant="primary" className="py-2 px-4 text-xs md:text-base md:py-3 md:px-6">
-                            Improve Now
+                        <Button
+                            variant="primary"
+                            className="py-2 px-4 text-xs md:text-base md:py-3 md:px-6"
+                            onClick={onExploreClick}
+                        >
+                            Explore Now
                         </Button>
                         {shouldShowCompleteProfile && (
                             <Button
