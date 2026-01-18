@@ -35,7 +35,7 @@ const TourDetailPage = () => {
     const tour = response.data;
 
     return (
-        <div className="pb-20 px-4 md:px-0">
+        <div className="px-4 md:px-0 relative">
             {/* Breadcrumbs */}
             <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Link to="/tours" className="flex items-center gap-2 hover:text-brand-blue transition-colors">
@@ -48,30 +48,27 @@ const TourDetailPage = () => {
 
             <div className='w-full h-px bg-gray-500 my-4'></div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-                {/* Main Content Area */}
-                <div className="lg:col-span-8 space-y-12">
-                    {/* Hero Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 h-screen">
+                <div className="lg:col-span-8 overflow-y-auto pr-2 space-y-12 no-scrollbar pb-24">
                     <section className="space-y-8">
-                        <div className="relative rounded-[40px] overflow-hidden group shadow-2xl">
-                            {/* Orange/Red Shadow Glow */}
-                            <div className="absolute inset-0 bg-brand-orange/20 mix-blend-overlay pointer-events-none group-hover:bg-brand-orange/30 transition-colors duration-500"></div>
+                        <div className="relative rounded-4xl shadow-md overflow-hidden group">
+                            {/* <div className="absolute inset-0 bg-brand-orange/20 mix-blend-overlay pointer-events-none group-hover:bg-brand-orange/30 transition-colors duration-500"></div> */}
 
                             <img
                                 src={tour.image}
                                 alt={tour.title}
-                                className="w-full h-[300px] md:h-[450px] object-cover"
+                                className="w-full h-80 md:h-[450px] object-cover"
                             />
 
                             <div className="absolute top-6 left-6">
-                                <span className="bg-white/90 backdrop-blur-md text-brand-blue px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
+                                <span className="bg-white/90 backdrop-blur-md text-brand-blue px-6 py-2 rounded-full text-xs font-medium tracking-normal shadow-lg">
                                     {tour.category}
                                 </span>
                             </div>
                         </div>
 
                         <div className="space-y-6">
-                            <h1 className="text-4xl md:text-5xl font-black text-[#1E1E1E] leading-[1.1]">
+                            <h1 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] leading-[1.1]">
                                 {tour.title}
                             </h1>
 
@@ -90,14 +87,17 @@ const TourDetailPage = () => {
                         </div>
                     </section>
 
-                    {/* Program Highlights */}
-                    <section className="space-y-6 bg-blue-50/30 rounded-[32px] p-6 md:p-8 border border-blue-100/50">
+                    <section className="space-y-6 rounded-4xl py-6 md:py-8">
                         <h2 className="text-3xl font-extrabold text-brand-blue-text border-l-4 border-brand-blue pl-4">
                             Program Highlights
                         </h2>
+
                         <ul className="grid grid-cols-1 gap-4">
                             {tour.highlights.map((item) => (
-                                <li key={item} className="flex items-start gap-3 text-gray-700 font-medium">
+                                <li
+                                    key={item}
+                                    className="flex items-start gap-3 text-gray-700 font-medium"
+                                >
                                     <span className="text-brand-orange text-xl mt-[-2px]">•</span>
                                     {item}
                                 </li>
@@ -105,26 +105,32 @@ const TourDetailPage = () => {
                         </ul>
                     </section>
 
-                    {/* Itinerary */}
                     <TourItinerary data={tour.itinerary} />
 
-                    {/* Safety Banner */}
                     <SafetyBanner />
 
-                    {/* FAQ */}
-                    <div className="pt-12">
+                    <section className="pt-12">
                         <h2 className="text-3xl font-extrabold text-brand-blue-text border-l-4 border-brand-blue pl-4 mb-8">
                             Frequently Asked Questions
                         </h2>
                         <FAQSection compact />
+                    </section>
+
+                </div>
+
+                <div className="lg:col-span-4 hidden lg:block">
+                    <div className="sticky top-6">
+                        <TourEnrollmentCard tour={tour} />
                     </div>
                 </div>
 
-                {/* Sidebar - Enrollment Card */}
-                <div className="lg:col-span-4 relative">
-                    <TourEnrollmentCard tour={tour} />
-                </div>
             </div>
+
+            {/* Render Enrollment Card for Mobile (It handles its own visibility) */}
+            <div className="lg:hidden">
+                <TourEnrollmentCard tour={tour} />
+            </div>
+
         </div>
     );
 };

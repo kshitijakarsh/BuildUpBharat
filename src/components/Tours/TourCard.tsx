@@ -27,8 +27,7 @@ const TourCard = ({
     originalPrice
 }: TourCardProps) => {
     return (
-        <div className="bg-white rounded-[40px] p-6 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-2">
-            {/* Image Container with orange border glow */}
+        <div className="bg-white rounded-4xl p-6 shadow-md">
             <div className="relative rounded-[32px] overflow-hidden mb-6 p-1 bg-[#FFB16933]">
                 <div className="rounded-[28px] overflow-hidden border-2 border-brand-orange-light/20">
                     <img
@@ -45,11 +44,11 @@ const TourCard = ({
                         {title}
                     </h3>
                     <p className="text-[#666666] text-sm font-nunito leading-relaxed">
-                        {description}
+                        {description.split(' ').slice(0, 20).join(' ')}
+                        {description.split(' ').length > 20 ? '...' : ''}
                     </p>
                 </div>
 
-                {/* Details List */}
                 <div className="space-y-3">
                     <div className="flex items-center gap-3 text-brand-orange">
                         <Clock className="w-5 h-5" />
@@ -61,11 +60,15 @@ const TourCard = ({
                     </div>
                     <div className="flex items-center gap-3 text-brand-orange">
                         <Calendar className="w-5 h-5" />
-                        <span className="text-[#333333] text-sm font-nunito">Starts {startDate}</span>
+                        <span className="text-[#333333] text-sm font-nunito">
+                            Starts {new Date(startDate).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+                        </span>
                     </div>
                     <div className="flex items-center gap-3 text-brand-orange">
                         <Calendar className="w-5 h-5" />
-                        <span className="text-[#333333] text-sm font-nunito">Book by {bookingDeadline}</span>
+                        <span className="text-[#333333] text-sm font-nunito">
+                            Book by {new Date(bookingDeadline).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+                        </span>
                     </div>
                 </div>
 
@@ -74,14 +77,14 @@ const TourCard = ({
                         <span className="text-gray-400 line-through text-xs md:text-sm font-nunito">₹{originalPrice}</span>
                         <span className="text-2xl md:text-3xl font-bold text-brand-blue-text font-sans">₹{price}</span>
                     </div>
-                    <Link
-                        to={`/tours/${id}`}
-                        className="flex items-center gap-1 text-[#666666] hover:text-brand-orange transition-colors duration-200"
-                    >
-                        <span className="text-sm font-medium">See more</span>
-                        <ArrowUpRight className="w-4 h-4" />
-                    </Link>
                 </div>
+                <Link
+                    to={`/tours/${id}`}
+                    className="flex justify-center items-center gap-1 text-[#666666] hover:text-brand-orange transition-colors duration-200"
+                >
+                    <span className="text-sm font-medium">See more</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                </Link>
             </div>
         </div>
     );

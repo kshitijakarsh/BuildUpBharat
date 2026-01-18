@@ -26,6 +26,7 @@ export interface Tour {
     bookingDeadline: string;
     highlights: string[];
     itinerary: ItineraryItem[];
+    impressions?: number;
     interestedUsersCount?: number;
     isInterested?: boolean;
     isActive?: boolean;

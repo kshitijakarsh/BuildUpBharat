@@ -29,6 +29,18 @@
   
   --animate-scroll: scroll 30s linear infinite;
 
+  /* Slide Up Animation */
+  --animate-slide-up: slide-up 0.3s ease-out;
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
   @keyframes scroll {
     from {
       transform: translateX(0);
@@ -51,5 +63,13 @@
   .mask-linear-fade {
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
