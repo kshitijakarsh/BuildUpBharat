@@ -35,7 +35,7 @@ const FAQItem = ({ question, answer }: FAQItemProps) => {
       <div
         className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}
       >
-        <div className="ml-10 text-[#666666] text-sm leading-relaxed font-nunito">{answer}</div>
+        <div className="ml-10 text-[#666666] text-[18px] leading-relaxed font-nunito">{answer}</div>
       </div>
     </div>
   )
