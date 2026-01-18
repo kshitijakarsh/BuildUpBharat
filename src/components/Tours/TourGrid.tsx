@@ -6,7 +6,7 @@ const TourGrid = () => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center min-h-[400px]">
+            <div className="flex justify-center items-center min-h-100">
                 <div className="w-12 h-12 border-4 border-brand-orange border-t-transparent rounded-full animate-spin"></div>
             </div>
         );

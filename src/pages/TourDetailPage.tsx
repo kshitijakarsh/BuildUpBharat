@@ -4,7 +4,7 @@ import { useTour } from '../hooks/useTours';
 import TourEnrollmentCard from '../components/Tours/TourDetail/TourEnrollmentCard';
 import TourItinerary from '../components/Tours/TourDetail/TourItinerary';
 import SafetyBanner from '../components/Tours/TourDetail/SafetyBanner';
-import FAQSection from '../components/Tours/FAQSection';
+import ToursFAQ from '../components/Tours/ToursFAQ';
 
 const TourDetailPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -57,7 +57,7 @@ const TourDetailPage = () => {
                             <img
                                 src={tour.image}
                                 alt={tour.title}
-                                className="w-full h-80 md:h-[450px] object-cover"
+                                className="w-full h-80 md:h-112.5 object-cover"
                             />
 
                             <div className="absolute top-6 left-6">
@@ -98,7 +98,7 @@ const TourDetailPage = () => {
                                     key={item}
                                     className="flex items-start gap-3 text-gray-700 font-medium"
                                 >
-                                    <span className="text-brand-orange text-xl mt-[-2px]">•</span>
+                                    <span className="text-brand-orange text-xl mt-0.5">•</span>
                                     {item}
                                 </li>
                             ))}
@@ -113,7 +113,7 @@ const TourDetailPage = () => {
                         <h2 className="text-3xl font-extrabold text-brand-blue-text border-l-4 border-brand-blue pl-4 mb-8">
                             Frequently Asked Questions
                         </h2>
-                        <FAQSection compact />
+                        <ToursFAQ compact />
                     </section>
 
                 </div>
