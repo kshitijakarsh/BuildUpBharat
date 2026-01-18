@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Calendar, Users2, ArrowRight, Heart, Eye, X, ChevronUp } from 'lucide-react';
 import Button from '../../common/Button';
 import { type Tour } from '../../../lib/api/tours';
-import { useShowInterest, useRemoveInterest } from '../../../hooks/useTours';
+import { useShowInterest, useRemoveInterest, useMyInterests } from '../../../hooks/useTours';
 
 interface TourEnrollmentCardProps {
     tour: Tour;
@@ -11,9 +11,14 @@ interface TourEnrollmentCardProps {
 const TourEnrollmentCard = ({ tour }: TourEnrollmentCardProps) => {
     const showInterestMutation = useShowInterest();
     const removeInterestMutation = useRemoveInterest();
+    const { data: myInterestsData } = useMyInterests();
     const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const myInterests = myInterestsData?.data || [];
 
-    const isInterested = tour.isInterested || false;
+    const isInterested =
+        (tour as any).hasShownInterest ||
+        tour.isInterested ||
+        myInterests.some((item: any) => item.tour?.id === tour.id || item.tourId === tour.id);
     const isLoading = showInterestMutation.isPending || removeInterestMutation.isPending;
 
     const handleToggleInterest = () => {
@@ -28,9 +33,15 @@ const TourEnrollmentCard = ({ tour }: TourEnrollmentCardProps) => {
         <div className={`bg-white rounded-3xl p-5 shadow-xl border border-gray-100 ${className}`}>
             {/* Header Pill */}
             <div className="mb-5">
-                <span className="px-3 py-1.5 bg-green-100 text-green-700 text-[9px] font-bold uppercase tracking-wider rounded-full">
-                    Enrolement Open
-                </span>
+                {new Date() > new Date(tour.bookingDeadline) ? (
+                    <span className="px-3 py-1.5 bg-red-100 text-red-700 text-[9px] font-bold uppercase tracking-wider rounded-full">
+                        Enrollment Closed
+                    </span>
+                ) : (
+                    <span className="px-3 py-1.5 bg-green-100 text-green-700 text-[9px] font-bold uppercase tracking-wider rounded-full">
+                        Enrollment Open
+                    </span>
+                )}
             </div>
 
             {/* Pricing */}
@@ -68,25 +79,13 @@ const TourEnrollmentCard = ({ tour }: TourEnrollmentCardProps) => {
                     </div>
                 </div>
 
-                {/* Impressions (Using mock or API data if available) */}
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl border border-blue-600/20 bg-blue-50/50 flex items-center justify-center text-blue-600">
                         <Eye size={18} className="stroke-[1.5]" />
                     </div>
                     <div>
                         <p className="text-gray-500 text-xs font-bold mb-0.5">Impressions</p>
-                        <p className="text-lg font-extrabold text-brand-navy">{tour.impressions || 42}</p>
-                    </div>
-                </div>
-
-                {/* Availability (Mock data for now as per design) */}
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl border border-blue-600/20 bg-blue-50/50 flex items-center justify-center text-blue-600">
-                        <Users2 size={18} className="stroke-[1.5]" />
-                    </div>
-                    <div>
-                        <p className="text-gray-500 text-xs font-bold mb-0.5">Availability</p>
-                        <p className="text-lg font-extrabold text-brand-navy">Only 12 slot left</p>
+                        <p className="text-lg font-extrabold text-brand-navy">{tour.impressions}</p>
                     </div>
                 </div>
             </div>
@@ -104,7 +103,7 @@ const TourEnrollmentCard = ({ tour }: TourEnrollmentCardProps) => {
                     disabled={isLoading}
                     className="w-full py-3 border border-gray-200 rounded-full flex items-center justify-center gap-2 font-bold text-brand-navy hover:bg-gray-50 transition-colors bg-white text-sm"
                 >
-                    {isInterested ? 'Remove Interest' : 'Show Interest'}
+                    {isInterested ? 'Interest Shown' : 'Show Interest'}
                     <Heart size={18} className="stroke-[2.5]" fill={isInterested ? "currentColor" : "none"} />
                 </button>
             </div>
